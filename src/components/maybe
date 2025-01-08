@@ -1,0 +1,373 @@
+<template>
+  <v-container class="d-flex flex-column pa-1 w-100">
+    <v-container
+        class="d-flex justify-center justify-space-between align-center pa-0 mt-3"
+    >
+      <h2>CONTRACTS</h2>
+    </v-container>
+    <v-container class="ma-0 pa-0 d-flex flex-column">
+      <div class="d-flex">
+        <h4 class="ma-2">FILTER BY</h4>
+      </div>
+      <div class="d-flex flex-row">
+        <v-text-field
+            v-model="filterName"
+            variant="outlined"
+            class="ma-2"
+            color="green-accent-4"
+            label="Title"
+        />
+        <v-text-field
+            v-model="filterType"
+            variant="outlined"
+            class="ma-2"
+            color="teal"
+            label="Type"
+        />
+        <v-text-field
+            v-model="filterPlanedStart"
+            variant="outlined"
+            class="ma-2"
+            color="cyan-darken-1"
+            label="Planed Start"
+        />
+        <v-text-field
+            v-model="filterPlanesEnd"
+            variant="outlined"
+            class="ma-2"
+            color="light-blue-darken-2"
+            label="Planed End"
+        />
+        <v-text-field
+            v-model="filterFaktStart"
+            variant="outlined"
+            class="ma-2"
+            color="light-blue-darken-4"
+            label="Actual Start"
+        />
+        <v-text-field
+            v-model="filterFaktEnd"
+            variant="outlined"
+            class="ma-2"
+            color="deep-purple-darken-4"
+            label="Actual End"
+        />
+        <v-text-field
+            v-model="filterAmountFrom"
+            variant="outlined"
+            class="ma-2"
+            color="purple-darken-3"
+            label="Amount From"
+        />
+        <v-text-field
+            v-model="filterAmountTo"
+            variant="outlined"
+            class="ma-2"
+            color="purple-accent-3"
+            label="Amount To"
+        />
+      </div>
+    </v-container>
+    <v-container class="w-100 pa-2 ma-2">
+<!--      кнопка добавления и диалоговое окно -->
+      <div class="ma-2 pa-2 d-flex flex-row justify-end align-center">
+        <v-btn @click="showAddPage=true" class="pa-2">Add</v-btn>
+        <v-dialog v-model="showAddPage" width="1000px">
+          <v-card
+              style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);"
+          >
+            <v-card-title>ADD NEW CONTRACT</v-card-title>
+            <v-card-item>
+              <v-text-field v-model="addTitle" label="Title"/>
+              <v-text-field v-model="addType" label="Type"/>
+              <v-text-field v-model="addPlanedStart" label="PlanedStart"/>
+              <v-text-field v-model="addPlanedEnd" label="PlanedEnd"/>
+              <v-text-field v-model="addFactStart" label="FactStart"/>
+              <v-text-field v-model="addFactEnd" label="FactEnd"/>
+              <v-text-field v-model="addAmount" label="Amount"/>
+            </v-card-item>
+            <v-card-actions>
+              <v-btn @click="OnClickCreateContract(addTitle, addType, addPlanedStart, addPlanedEnd, addFactStart, addFactEnd, addAmount)">ADD</v-btn>
+              <v-btn @click="showAddPage = false">cancel</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
+<!--      скрытый элемент для показа стадий-->
+      <v-card v-if="showStage" class="pa-2  w-100 d-flex flex-column" style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);">
+        <div class="d-flex flex-row justify-space-between ma-2 pa-2">
+          <h2>STAGES</h2>
+          <v-btn variant="outlined" @click="onClickShowAddStage" text="ADD"/>
+        </div>
+        <div v-if="ShowAddStage" class="pa-2" style="border: solid 2px darkgreen">
+          <div class="d-flex flex-column">
+            <div class="d-flex flex-row">
+              <v-text-field hide-details class="pa-2" variant="outlined" v-model="stageTitle">title</v-text-field>
+              <v-text-field hide-details class="pa-2" variant="outlined" v-model="stageAmount">amount</v-text-field>
+            </div>
+            <div class="d-flex flex-row ma-0 pa-0">
+              <v-text-field hide-details class="pa-2" variant="outlined" v-model="stagePlannedStartDate">plannedStartDate</v-text-field>
+              <v-text-field hide-details class="pa-2" variant="outlined" v-model="stagePlannedEndDate">plannedEndDate</v-text-field>
+              <v-text-field hide-details class="pa-2" variant="outlined" v-model="stageActualStartDate">actualStartDate</v-text-field>
+              <v-text-field hide-details class="pa-2" variant="outlined" v-model="stageActualEndDate">actualEndDate</v-text-field>
+            </div>
+            <div class="d-flex flex-row">
+              <v-text-field hide-details class="pa-2 " variant="outlined" v-model="stagePlannedMaterialCosts">plannedMaterialCosts</v-text-field>
+              <v-text-field hide-details class="pa-2 " variant="outlined" v-model="stagePlannedSalaryCosts">plannedSalaryCosts</v-text-field>
+              <v-text-field hide-details class="pa-2 " variant="outlined" v-model="stageActualMaterialCosts">actualMaterialCosts</v-text-field>
+              <v-text-field hide-details class="pa-2 " variant="outlined" v-model="stageActualSalaryCosts">actualSalaryCosts</v-text-field>
+            </div>
+          </div>
+          <div class="d-flex flex-row justify-start align-center ml-2">
+            <v-btn class="mr-3" @click="ShowAddStage = false" text="CLOSE"/>
+            <v-btn @click="onClickAddStage" text="ADD"/>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <v-card v-for="contract in contractsWithStages" :key="contract.id" class="d-flex flex-column pa-2 ma-2">
+            <v-card-title class="d-flex justify-center align-center">{{ stage.title }}</v-card-title>
+            <v-card-text class="d-flex flex-column">
+              <h4>Actual Date:</h4>
+              {{stage.actualStartDate}} - {{stage.actualEndDate}}
+              <h4>Planned Date: </h4>
+              {{stage.plannedStartDate}} - {{stage.plannedEndDate}}
+              <h4>Material Cost: </h4>
+              <div>Planned: {{stage.plannedMaterialCosts}}</div>
+              <div>Actual: {{stage.actualMaterialCosts}}</div>
+              <h4>Salary Cost: </h4>
+              <div>Planned: {{stage.plannedSalaryCosts}}</div>
+              <div>Actual: {{stage.actualSalaryCosts}}</div>
+              <h3>Amount: {{stage.amount}}</h3>
+            </v-card-text>
+            <v-card-actions class="d-flex flex-row justify-space-around">
+              <v-btn variant="outlined" text="DELETE" @click="deteleStage"/>
+              <v-btn variant="outlined" text="EDIT" @click="console.log(store.$state.contractStages)"/>
+            </v-card-actions>
+          </v-card>
+        </div>
+        <div>
+          <v-btn class="ma-2 pa-2" variant="outlined" @click="showStage = false, ShowAddStage = false">Close</v-btn>
+        </div>
+      </v-card>
+<!--      скрытый элемент для показа котрагентов-->
+        <v-card v-if="showConrt" class="pa-2 ma-2 d-flex flex-column"  style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);">
+          <div class="d-flex flex-row justify-space-between">
+            <v-card-title>Conterparties</v-card-title>
+            <v-btn text="ADD" @click="addContrpatry"/>
+          </div>
+          <v-card-text>
+            <v-card class="w-25" v-for="contrparty in selectedContractForConterpartyContract.counterpartyContracts" :key="contrparty.id" >
+              <v-card-text>
+                {{contrparty.title}}
+              </v-card-text>
+            </v-card>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn @click="showConrt = false">Cancel</v-btn>
+          </v-card-actions>
+        </v-card>
+
+      <div v-if="showEdit">
+        <v-card>
+          <v-card-title>EDIT ITEM</v-card-title>
+          <v-text-field v-model="editedContractTitle"></v-text-field>
+          <v-text-field v-model="editedContractType"></v-text-field>
+          <v-text-field v-model="editedContractPlannedStartDate"></v-text-field>
+          <v-text-field v-model="editedContractPlannedEndDate"></v-text-field>
+          <v-text-field v-model="editedContractActualStartDate"></v-text-field>
+          <v-text-field v-model="editedContractActualEndDate"></v-text-field>
+          <v-text-field v-model="editedContractAmount"></v-text-field>
+          <v-card-actions>
+            <v-btn @click="showEdit = false" text="CLOSE"/>
+            <v-btn @click="onClickEditContract" text="CONFIRM"/>
+          </v-card-actions>
+        </v-card>
+      </div>
+
+      <v-card class="w-100 ma-1 d-flex flex-row justify-space-between" v-for="(contract) in filteredContracts" :key="contract.id">
+          <div class="pa-2 ma-2" v-text="contract.name"/>
+          <div class="pa-2 ma-2" v-text="contract.contractType"/>
+          <div class="pa-2 ma-2" v-text="contract.plannedStartDate"/>
+          <div class="pa-2 ma-2" v-text="contract.plannedEndDate"/>
+          <div class="pa-2 ma-2" v-text="contract.actualStartDate"/>
+          <div class="pa-2 ma-2" v-text="contract.actualEndDate"/>
+          <div class="pa-2 ma-2" v-text="contract.amount"/>
+        <div class="d-flex flex-row align-center">
+          <v-btn @click="onClickShowStages(contract.id)" text="Stages" class="ma-1"/>
+          <v-btn @click="onClickShowContrpatry(contract.id)" text="ContrAgents" class="ma-1"/>
+          <v-btn @click="onClickShowEditContract(contract.id)">EDIT</v-btn>
+          <v-btn @click="onClickDeleteContract(contract.id)">DELETE</v-btn>
+        </div>
+      </v-card>
+    </v-container>
+  </v-container>
+</template>
+<script setup>
+import {ref, computed} from 'vue';
+import {useRoomStore} from "../roomStore/piniaRoomStore.js";
+
+
+let store = useRoomStore()
+let showStage = ref(false)
+let showConrt = ref(false)
+let showAddPage = ref(false)
+let showEdit = ref(false)
+let ShowAddStage = ref(false)
+let num
+
+let filterName = ref('')
+let filterType = ref('')
+let filterPlanedStart = ref('')
+let filterPlanesEnd = ref('')
+let filterFaktStart = ref('')
+let filterFaktEnd = ref('')
+let filterAmountFrom = ref()
+let filterAmountTo = ref()
+
+let addTitle = ref('')
+let addType = ref('')
+let addPlanedStart = ref('')
+let addPlanedEnd = ref('')
+let addFactStart =ref('')
+let addFactEnd = ref('')
+let addAmount = ref('')
+let selectedContractForStages
+let selectedContractForConterpartyContract
+
+let editedContractTitle = ref('')
+let editedContractType = ref('')
+let editedContractPlannedStartDate = ref('')
+let editedContractPlannedEndDate = ref('')
+let editedContractActualStartDate = ref('')
+let editedContractActualEndDate = ref('')
+let editedContractAmount = ref('')
+
+let stageTitle = ref('')
+let stageAmount = ref('')
+let stagePlannedStartDate = ref('')
+let stagePlannedEndDate = ref('')
+let stageActualStartDate = ref('')
+let stageActualEndDate = ref('')
+let stagePlannedMaterialCosts = ref('')
+let stagePlannedSalaryCosts = ref('')
+let stageActualMaterialCosts = ref('')
+let stageActualSalaryCosts = ref('')
+
+function onClickShowStages(id) {
+  if(showStage.value === true){
+    showStage.value = false;
+  }
+  else{
+    selectedContractForStages = store.$state.contracts.find(
+        (contract) => contract.id === id
+    );
+    showStage.value = true;
+  }
+}
+
+const contractsWithStages = computed(() => {
+  return store.$state.contracts.value.map(contract => {
+    return {
+      ...contract,
+      stages: store.$state.contractStages.value.filter(stage => contract.stages.includes(stage.id)),
+    };
+  });
+});
+
+
+function onClickShowContrpatry(id){
+  if(showConrt.value){
+    showConrt.value = false;
+  }
+  else {
+    selectedContractForConterpartyContract = store.$state.contracts.find(
+        (contracts) => contracts.id === id
+    )
+    showConrt.value = true;
+  }
+}
+
+function onClickShowEditContract(id){
+  showEdit.value = true
+  const index = store.$state.contracts.findIndex((item) => item.id === id);
+  num = index
+  editedContractTitle = store.$state.contracts[index].name
+  editedContractType = store.$state.contracts[index].contractType
+  editedContractPlannedStartDate = store.$state.contracts[index].plannedStartDate
+  editedContractPlannedEndDate = store.$state.contracts[index].plannedEndDate
+  editedContractActualStartDate = store.$state.contracts[index].actualStartDate
+  editedContractActualEndDate = store.$state.contracts[index].actualEndDate
+  editedContractAmount = store.$state.contracts[index].amount
+}
+
+function onClickEditContract(){
+  store.$state.contracts[num].name = editedContractTitle
+  store.$state.contracts[num].contractType = editedContractType
+  store.$state.contracts[num].plannedStartDate = editedContractPlannedStartDate
+  store.$state.contracts[num].plannedEndDate = editedContractPlannedEndDate
+  store.$state.contracts[num].actualStartDate = editedContractActualStartDate
+  store.$state.contracts[num].actualEndDate = editedContractActualEndDate
+  store.$state.contracts[num].amount = editedContractAmount
+  showEdit.value = false
+}
+
+
+function onClickDeleteContract(id){
+  const index = store.$state.contracts.findIndex((item) => item.id === id);
+  if(index !== -1){
+    store.$state.contracts.splice(index,1);
+  }
+}
+
+const OnClickCreateContract = (title, type, planStart, planEnd, fackStart, fackEnd, amount) =>{
+  store.$state.contracts = [...store.$state.contracts, {
+    id: store.$state.currendContractId,
+    title: title,
+    type:type,
+    plannedStartDate: planStart,
+    plannedEndDate: planEnd,
+    actualStartDate: fackStart,
+    actualEndDate: fackEnd,
+    amount: amount,
+  }]
+  store.$state.currendContractId += 1
+  addTitle.value = ''
+  addType.value = ''
+  addPlanedStart.value = ''
+  addPlanedEnd.value = ''
+  addFactStart.value = ''
+  addFactEnd.value = ''
+  addAmount.value = ''
+  showAddPage.value = false
+}
+
+function onClickShowAddStage(){
+  ShowAddStage.value = true
+}
+
+function onClickAddStage(){
+  store.addStage(selectedContractForStages, stageTitle, stageAmount, stagePlannedStartDate, stagePlannedEndDate, stageActualStartDate, stageActualEndDate, stagePlannedMaterialCosts, stagePlannedSalaryCosts, stageActualMaterialCosts, stageActualSalaryCosts)
+}
+
+const filteredContracts = computed(() => {
+  return store.$state.contracts.filter(contract => {
+    const nameMatch = contract.name.toLowerCase().includes(filterName.value.toLowerCase());
+    const typeMatch = contract.contractType.toLowerCase().includes(filterType.value.toLowerCase());
+    const planedStartMatch = contract.plannedStartDate.toLowerCase().includes(filterPlanedStart.value.toLowerCase());
+    const planedEndMatch = contract.plannedEndDate.toLowerCase().includes(filterPlanesEnd.value.toLowerCase());
+    const actualStartMatch = contract.actualStartDate.toLowerCase().includes(filterFaktStart.value.toLowerCase());
+    const actualEndMatch = contract.actualEndDate.toLowerCase().includes(filterFaktEnd.value.toLowerCase());
+    const amountFrom = filterAmountFrom.value ? parseFloat(filterAmountFrom.value) : null;
+    const amountTo = filterAmountTo.value ? parseFloat(filterAmountTo.value) : null;
+    let amountMatch = true;
+    if (amountFrom !== null && amountTo !== null) {
+      amountMatch = contract.amount >= amountFrom && contract.amount <= amountTo;
+    } else if (amountFrom !== null) {
+      amountMatch = contract.amount >= amountFrom;
+    } else if (amountTo !== null) {
+      amountMatch = contract.amount <= amountTo;
+    }
+    return nameMatch && typeMatch && planedStartMatch && planedEndMatch && actualStartMatch && actualEndMatch && amountMatch;
+  });
+});
+</script>
