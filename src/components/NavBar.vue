@@ -9,8 +9,6 @@
     <router-link style="color: black" to="/contract"><v-app-bar-nav-icon><v-icon size="large">mdi-file-document-edit-outline</v-icon></v-app-bar-nav-icon></router-link>
     <router-link style="color: black" to="/contractor"><v-app-bar-nav-icon><v-icon size="large">mdi-earth</v-icon></v-app-bar-nav-icon></router-link>
     <router-link style="color: black" to="/report"><v-app-bar-nav-icon><v-icon size="large">mdi-microsoft-excel</v-icon></v-app-bar-nav-icon></router-link>
-    <router-link style="color: black" to="/contract"><v-app-bar-nav-icon class="mr-7"><v-icon size="large">mdi-information-box-outline</v-icon></v-app-bar-nav-icon></router-link>
+    <router-link style="color: black" to="/admin"><v-app-bar-nav-icon class="mr-7"><v-icon size="large">mdi-information-box-outline</v-icon></v-app-bar-nav-icon></router-link>
   </v-app-bar>
 </template>
-<script setup>
-</script>

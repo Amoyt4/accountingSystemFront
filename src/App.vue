@@ -10,5 +10,12 @@
 </template>
 
 <script setup>
+import {useRoomStore} from "./roomStore/piniaRoomStore.js";
 import NavBar from "./components/NavBar.vue";
+import {onMounted} from "vue";
+
+const store = useRoomStore();
+onMounted(() => {
+  store.useOnlyOnes()
+});
 </script>

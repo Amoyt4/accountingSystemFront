@@ -40,7 +40,28 @@
           </v-card>
         </v-dialog>
       </div>
-      <Stages v-if="showStage" :selectedContractForStages="selectedContractForStages" />
+      <v-card v-if="showEdit" class="ma-2 pa-2" >
+        <v-card-title>EDIT CONTRACT</v-card-title>
+        <v-card-text>
+          <div class="d-flex flex-row">
+            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractTitle" variant="outlined" label="Title" />
+            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractType" variant="outlined" label="Type" />
+            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractAmount" variant="outlined" label="Amount" />
+          </div>
+          <div class="d-flex flex-row">
+            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractPlannedStartDate" variant="outlined" label="Planed Start" />
+            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractPlannedEndDate" variant="outlined" label="Planed End" />
+            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractActualStartDate" variant="outlined" label="Actual Start" />
+            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractActualEndDate" variant="outlined" label="Actual End" />
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn @click="showEdit = false" variant="outlined" text="CLOSE"/>
+          <v-btn @click="confirmEditContract" variant="outlined" text="CONFIRM" />
+        </v-card-actions>
+      </v-card>
+      <Stages v-if="showStage" :selectedContractForStages="selectedContractForStages"  @value-from-child="handleValue"/>
+      <SubContract v-if="showSubContract" :selectedContractForSubContract="selectedContractForSubContract" @value-from-sub-contract="handleValueSubContract" />
       <v-card class="w-100 ma-1 d-flex flex-row justify-space-between" v-for="contract in filteredContracts" :key="contract.id">
         <div class="pa-2 ma-2" v-text="contract.name" />
         <div class="pa-2 ma-2" v-text="contract.contractType" />
@@ -64,14 +85,14 @@
 import { ref, computed } from 'vue';
 import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import Stages from "./Stages.vue";
+import SubContract from "./SubContract.vue";
 
 const store = useRoomStore();
 
 const showStage = ref(false);
-const showConrt = ref(false);
+const showSubContract = ref(false);
 const showAddPage = ref(false);
 const showEdit = ref(false);
-const ShowAddStage = ref(false);
 
 const filterName = ref('');
 const filterType = ref('');
@@ -91,7 +112,8 @@ const addFactEnd = ref('');
 const addAmount = ref('');
 
 const selectedContractForStages = ref(null);
-const selectedContractForConterpartyContract = ref(null);
+const selectedContractForSubContract = ref(null);
+let selectedContractid = ref(null);
 
 const editedContractTitle = ref('');
 const editedContractType = ref('');
@@ -100,6 +122,7 @@ const editedContractPlannedEndDate = ref('');
 const editedContractActualStartDate = ref('');
 const editedContractActualEndDate = ref('');
 const editedContractAmount = ref('');
+
 
 function onClickShowStages(id) {
   if (showStage.value) {
@@ -111,17 +134,18 @@ function onClickShowStages(id) {
 }
 
 function onClickShowContrpatry(id) {
-  if (showConrt.value) {
-    showConrt.value = false;
+  if (showSubContract.value) {
+    showSubContract.value = false;
   } else {
-    selectedContractForConterpartyContract.value = store.$state.contracts.find((contract) => contract.id === id);
-    showConrt.value = true;
+    selectedContractForSubContract.value = store.$state.contracts.find((contract) => contract.id === id);
+    showSubContract.value = true;
   }
 }
 
 function onClickShowEditContract(id) {
-  showEdit.value = true;
+  showEdit.value = showEdit.value === false;
   const contract = store.$state.contracts.find((item) => item.id === id);
+  selectedContractid.value = contract.id
   if (contract) {
     editedContractTitle.value = contract.name;
     editedContractType.value = contract.contractType;
@@ -130,6 +154,29 @@ function onClickShowEditContract(id) {
     editedContractActualStartDate.value = contract.actualStartDate;
     editedContractActualEndDate.value = contract.actualEndDate;
     editedContractAmount.value = contract.amount;
+  }
+}
+
+
+const confirmEditContract = () => {
+  const contractToUpdate = store.$state.contracts.find(contract => contract.id === selectedContractid.value)
+  if(contractToUpdate) {
+    contractToUpdate.name = editedContractTitle.value
+    contractToUpdate.contractType = editedContractType.value
+    contractToUpdate.plannedStartDate = editedContractPlannedStartDate.value
+    contractToUpdate.plannedEndDate = editedContractPlannedEndDate.value
+    contractToUpdate.actualStartDate = editedContractActualStartDate.value
+    contractToUpdate.actualEndDate = editedContractActualEndDate.value
+    contractToUpdate.amount = editedContractAmount.value
+    selectedContractid.value = null;
+    showEdit.value = false
+    editedContractTitle.value = '';
+    editedContractType.value = '';
+    editedContractPlannedStartDate.value = '';
+    editedContractPlannedEndDate.value = '';
+    editedContractActualStartDate.value = '';
+    editedContractActualEndDate.value = '';
+    editedContractAmount.value = '';
   }
 }
 
@@ -142,7 +189,7 @@ function onClickDeleteContract(id) {
 
 function onClickCreateContract() {
   store.$state.contracts.push({
-    id: store.$state.currendContractId,
+    id: store.getCurrentContractId,
     name: addTitle.value,
     contractType: addType.value,
     plannedStartDate: addPlanedStart.value,
@@ -150,9 +197,9 @@ function onClickCreateContract() {
     actualStartDate: addFactStart.value,
     actualEndDate: addFactEnd.value,
     amount: addAmount.value,
-    stages: []
+    stages: [],
+    subContracts: [],
   });
-  store.$state.currendContractId += 1;
   addTitle.value = '';
   addType.value = '';
   addPlanedStart.value = '';
@@ -184,4 +231,12 @@ const filteredContracts = computed(() => {
     return nameMatch && typeMatch && planedStartMatch && planedEndMatch && actualStartMatch && actualEndMatch && amountMatch;
   });
 });
+
+const handleValue = (value) =>{
+  showStage.value = value;
+}
+
+const handleValueSubContract = (value) => {
+  showSubContract.value = value
+}
 </script>

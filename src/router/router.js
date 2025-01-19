@@ -4,6 +4,7 @@ import Contract from "../components/Contract.vue";
 import Contractor from "../components/Contractor.vue";
 import Info from "../pages/Info.vue";
 import Report from "../pages/Report.vue";
+import Admin from "../components/Admin.vue";
 const routes = [
     {
         path: "/",
@@ -20,6 +21,10 @@ const routes = [
     {
         path: "/report",
         component: Report,
+    },
+    {
+        path:"/admin",
+        component: Admin,
     }
 ];
 

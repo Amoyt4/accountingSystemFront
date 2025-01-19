@@ -67,8 +67,6 @@ import {useRoomStore} from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
 
 let store = useRoomStore()
-
-let currendCounterpartyID = store.$state.counterparties.length + 1
 let onClickShowDialog = ref(false)
 let onClickShowEdit = ref(false)
 let currendEditID = ref(-1 )
@@ -105,6 +103,19 @@ function onClickConfirmEdit() {
     };
   }
   onClickShowEdit.value = false;
+}
+
+function  onClickAddCounterparty(){
+  store.$state.counterparties.push({
+    id: store.getCurrentCounterpartiesId,
+    name: addCounterpartyName.value,
+    address: addCounterpartyAddress.value,
+    inn: addVCounterpartyInn.value,
+  })
+  addCounterpartyName.value = '';
+  addCounterpartyAddress.value = '';
+  addVCounterpartyInn.value = '';
+  onClickShowDialog.value = false;
 }
 
 function onClickDeleteCounterparty(id){
