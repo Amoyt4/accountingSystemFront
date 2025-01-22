@@ -1,4 +1,5 @@
 <template>
+  <NavBar class="mr-5 ml-5 rounded-b-xl" />
   <v-container class="d-flex flex-row">
     <v-card class="w-50 ma-2 pa-2">
       <v-card-title class="d-flex justify-center align-center">
@@ -32,6 +33,7 @@
 
 <script setup>
 import {ref} from "vue";
+import NavBar from "../components/NavBar.vue";
 
 let contractsNames = ['хуй']
 let valueOfContract = ref();

@@ -1,4 +1,5 @@
 <template>
+  <NavBar class="mr-5 ml-5 rounded-b-xl" />
   <v-container class="d-flex justify-center mt-10">
     <v-card class="d-flex flex-column w-75 rounded-lg" elevation="6" >
       <v-card-title class="d-flex flex-row justify-center align-center pa-2 ma-2">
@@ -35,4 +36,5 @@
 </template>
 <script setup>
 
+import NavBar from "../components/NavBar.vue";
 </script>

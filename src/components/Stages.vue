@@ -91,6 +91,7 @@
 <script setup>
 import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
+import NavBar from "./NavBar.vue";
 const store = useRoomStore();
 let ShowAddStage = ref(false)
 let ShowEditStage = ref(false)

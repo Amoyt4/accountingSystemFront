@@ -1,14 +1,24 @@
-import { createMemoryHistory, createRouter } from "vue-router";
-import App from "../App.vue";
+import { createWebHistory, createRouter } from "vue-router";
 import Contract from "../components/Contract.vue";
 import Contractor from "../components/Contractor.vue";
 import Info from "../pages/Info.vue";
 import Report from "../pages/Report.vue";
 import Admin from "../components/Admin.vue";
+import Registration from "../pages/Registration.vue"; // Импорт компонента
+import SignIN from "../pages/SignIN.vue";
+
 const routes = [
     {
-        path: "/",
+        path: "/registration",
+        component: Registration,
+    },
+    {
+        path: "/Info",
         component: Info,
+    },
+    {
+        path: "/",
+        component: SignIN,
     },
     {
         path: "/contract",
@@ -23,12 +33,12 @@ const routes = [
         component: Report,
     },
     {
-        path:"/admin",
+        path: "/admin",
         component: Admin,
-    }
+    },
 ];
 
 export const router = createRouter({
-    history: createMemoryHistory(),
+    history: createWebHistory(), // Используем createWebHistory для SPA
     routes,
 });

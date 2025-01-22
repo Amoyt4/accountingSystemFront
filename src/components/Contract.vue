@@ -1,7 +1,9 @@
 <template>
+  <NavBar class="mr-5 ml-5 rounded-b-xl" />
   <v-container class="d-flex flex-column pa-1 w-100">
     <v-container class="d-flex justify-center justify-space-between align-center pa-0 mt-3">
       <h2>CONTRACTS</h2>
+      <v-btn text="LOAD DATA" variant="outlined" @click="store.loadAllData" />
     </v-container>
     <v-container class="ma-0 pa-0 d-flex flex-column">
       <div class="d-flex">
@@ -86,6 +88,7 @@ import { ref, computed } from 'vue';
 import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import Stages from "./Stages.vue";
 import SubContract from "./SubContract.vue";
+import NavBar from "./NavBar.vue";
 
 const store = useRoomStore();
 
