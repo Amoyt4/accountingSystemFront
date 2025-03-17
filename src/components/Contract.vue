@@ -1,43 +1,169 @@
 <template>
   <NavBar class="mr-5 ml-5 rounded-b-xl" />
   <v-container class="d-flex flex-column pa-1 w-100">
-    <v-container class="d-flex justify-center justify-space-between align-center pa-0 mt-3">
-      <h2>CONTRACTS</h2>
-      <v-btn text="LOAD DATA" variant="outlined" @click="store.loadAllData" />
+    <v-container class="d-flex justify-center justify-space-between align-center pa-2 mt-3 rounded-t-lg" style="background-color: rgba(33,103,105,2)">
+      <h2 style="color: navajowhite">CONTRACTS</h2>
+      <v-btn text="LOAD DATA" style="color: navajowhite" variant="outlined" @click="store.loadAllData" />
     </v-container>
-    <v-container class="ma-0 pa-0 d-flex flex-column">
+    <v-container
+        class="ma-0 pa-1 d-flex flex-column rounded-b-lg"
+        style="background-color: rgba(33,103,105,2)"
+    >
       <div class="d-flex">
-        <h4 class="ma-2">FILTER BY</h4>
+        <h4 class="ma-2" style="color: navajowhite">FILTER BY</h4>
       </div>
-      <div class="d-flex flex-row">
-        <v-text-field v-model="filterName" variant="outlined" class="ma-2" color="green-accent-4" label="Title" />
-        <v-text-field v-model="filterType" variant="outlined" class="ma-2" color="teal" label="Type" />
-        <v-text-field v-model="filterPlanedStart" variant="outlined" class="ma-2" color="cyan-darken-1" label="Planed Start" />
-        <v-text-field v-model="filterPlanesEnd" variant="outlined" class="ma-2" color="light-blue-darken-2" label="Planed End" />
-        <v-text-field v-model="filterFaktStart" variant="outlined" class="ma-2" color="light-blue-darken-4" label="Actual Start" />
-        <v-text-field v-model="filterFaktEnd" variant="outlined" class="ma-2" color="deep-purple-darken-4" label="Actual End" />
-        <v-text-field v-model="filterAmountFrom" variant="outlined" class="ma-2" color="purple-darken-3" label="Amount From" />
-        <v-text-field v-model="filterAmountTo" variant="outlined" class="ma-2" color="purple-accent-3" label="Amount To" />
+      <div class="d-flex flex-row"
+      >
+        <v-text-field
+            v-model="filterName"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Title"
+            style="color: navajowhite"
+        />
+        <v-text-field
+            v-model="filterType"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Type"
+            style="color: navajowhite"
+        />
+        <v-text-field
+            v-model="filterPlanedStart"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Planed Start"
+            style="color: navajowhite"
+        />
+        <v-text-field
+            v-model="filterPlanesEnd"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Planed End"
+            style="color: navajowhite"
+        />
+        <v-text-field
+            v-model="filterFaktStart"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Actual Start"
+            style="color: navajowhite"
+        />
+        <v-text-field
+            v-model="filterFaktEnd"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Actual End"
+            style="color: navajowhite"
+        />
+        <v-text-field
+            v-model="filterAmountFrom"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Amount From"
+            style="color: navajowhite"
+        />
+        <v-text-field
+            v-model="filterAmountTo"
+            hide-details
+            variant="outlined"
+            class="ma-2"
+            label="Amount To"
+            style="color: navajowhite"
+        />
       </div>
     </v-container>
-    <v-container class="w-100 pa-2 ma-2">
-      <div class="ma-2 pa-2 d-flex flex-row justify-end align-center">
-        <v-btn @click="showAddPage = true" class="pa-2">Add</v-btn>
+    <v-container class="w-100 pa-2 ma-2 mt-1">
+      <div class="ma-2 mt-0 pa-2 d-flex flex-row justify-end align-center">
+        <v-btn
+            @click="showAddPage = true"
+            class="pa-2"
+            variant="outlined"
+            text="Add"
+            style="color: navajowhite;background-color: rgba(33,103,105,2);"
+        />
         <v-dialog v-model="showAddPage" width="1000px">
-          <v-card style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);">
-            <v-card-title>ADD NEW CONTRACT</v-card-title>
+          <v-card class="pa-2" style="background: rgba(33,103,105,2);">
+            <v-card-title style="color: navajowhite">ADD NEW CONTRACT</v-card-title>
             <v-card-item>
-              <v-text-field v-model="addTitle" label="Title" />
-              <v-text-field v-model="addType" label="Type" />
-              <v-text-field v-model="addPlanedStart" label="PlanedStart" />
-              <v-text-field v-model="addPlanedEnd" label="PlanedEnd" />
-              <v-text-field v-model="addFactStart" label="FactStart" />
-              <v-text-field v-model="addFactEnd" label="FactEnd" />
-              <v-text-field v-model="addAmount" label="Amount" />
+              <v-text-field
+                  variant="outlined"
+                  hide-details
+                  class="ma-1 pa-2"
+                  style="color: navajowhite"
+                  label="Title"
+                  v-model="addTitle"
+              />
+              <v-text-field
+                  variant="outlined"
+                  hide-details
+                  class="ma-1 pa-2"
+                  style="color: navajowhite"
+                  label="Type"
+                  v-model="addType"
+              />
+              <v-text-field
+                  variant="outlined"
+                  hide-details
+                  class="ma-1 pa-2"
+                  style="color: navajowhite"
+                  label="PlanedStart"
+                  v-model="addPlanedStart"
+              />
+              <v-text-field
+                  variant="outlined"
+                  hide-details
+                  class="ma-1 pa-2"
+                  style="color: navajowhite"
+                  label="PlanedEnd"
+                  v-model="addPlanedEnd"
+              />
+              <v-text-field
+                  variant="outlined"
+                  hide-details
+                  class="ma-1 pa-2"
+                  style="color: navajowhite"
+                  label="FactStart"
+                  v-model="addFactStart"
+              />
+              <v-text-field
+                  variant="outlined"
+                  hide-details
+                  class="ma-1 pa-2"
+                  style="color: navajowhite"
+                  label="FactEnd"
+                  v-model="addFactEnd"
+              />
+              <v-text-field
+                  variant="outlined"
+                  hide-details
+                  class="ma-1 pa-2"
+                  style="color: navajowhite"
+                  label="Amount"
+                  v-model="addAmount"
+              />
             </v-card-item>
-            <v-card-actions>
-              <v-btn @click="onClickCreateContract">ADD</v-btn>
-              <v-btn @click="showAddPage = false">Cancel</v-btn>
+            <v-card-actions class="ma-2">
+              <v-btn
+                  variant="outlined"
+                  style="color: navajowhite "
+                  @click="onClickCreateContract"
+                  text="ADD"
+              />
+              <v-btn
+                  variant="outlined"
+                  style="
+                  color: navajowhite "
+                  @click="showAddPage = false"
+                  text="Cancel"
+              />
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -46,37 +172,131 @@
         <v-card-title>EDIT CONTRACT</v-card-title>
         <v-card-text>
           <div class="d-flex flex-row">
-            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractTitle" variant="outlined" label="Title" />
-            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractType" variant="outlined" label="Type" />
-            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractAmount" variant="outlined" label="Amount" />
+            <v-text-field
+                hide-details
+                class="pa-2 ma-1"
+                v-model="editedContractTitle"
+                variant="outlined"
+                label="Title"
+            />
+            <v-text-field
+                hide-details
+                class="pa-2 ma-1"
+                v-model="editedContractType"
+                variant="outlined"
+                label="Type"
+            />
+            <v-text-field
+                hide-details
+                class="pa-2 ma-1"
+                v-model="editedContractAmount"
+                variant="outlined"
+                label="Amount" />
           </div>
           <div class="d-flex flex-row">
-            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractPlannedStartDate" variant="outlined" label="Planed Start" />
-            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractPlannedEndDate" variant="outlined" label="Planed End" />
-            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractActualStartDate" variant="outlined" label="Actual Start" />
-            <v-text-field hide-details class="pa-2 ma-1" v-model="editedContractActualEndDate" variant="outlined" label="Actual End" />
+
+            <v-text-field
+                hide-details
+                class="pa-2 ma-1"
+                v-model="editedContractPlannedStartDate"
+                variant="outlined"
+                label="Planed Start"
+            />
+            <v-text-field
+                hide-details
+                class="pa-2 ma-1"
+                v-model="editedContractPlannedEndDate"
+                variant="outlined"
+                label="Planed End"
+            />
+            <v-text-field
+                hide-details
+                class="pa-2 ma-1"
+                v-model="editedContractActualStartDate"
+                variant="outlined"
+                label="Actual Start"
+            />
+            <v-text-field
+                hide-details
+                class="pa-2 ma-1"
+                v-model="editedContractActualEndDate"
+                variant="outlined"
+                label="Actual End"
+            />
           </div>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="showEdit = false" variant="outlined" text="CLOSE"/>
-          <v-btn @click="confirmEditContract" variant="outlined" text="CONFIRM" />
+          <v-btn
+              @click="showEdit = false"
+              variant="outlined"
+              text="CLOSE"
+          />
+          <v-btn
+              @click="confirmEditContract"
+              variant="outlined"
+              text="CONFIRM"
+          />
+
         </v-card-actions>
       </v-card>
-      <Stages v-if="showStage" :selectedContractForStages="selectedContractForStages"  @value-from-child="handleValue"/>
-      <SubContract v-if="showSubContract" :selectedContractForSubContract="selectedContractForSubContract" @value-from-sub-contract="handleValueSubContract" />
-      <v-card class="w-100 ma-1 d-flex flex-row justify-space-between" v-for="contract in filteredContracts" :key="contract.id">
-        <div class="pa-2 ma-2" v-text="contract.name" />
-        <div class="pa-2 ma-2" v-text="contract.contractType" />
-        <div class="pa-2 ma-2" v-text="contract.plannedStartDate" />
-        <div class="pa-2 ma-2" v-text="contract.plannedEndDate" />
-        <div class="pa-2 ma-2" v-text="contract.actualStartDate" />
-        <div class="pa-2 ma-2" v-text="contract.actualEndDate" />
-        <div class="pa-2 ma-2" v-text="contract.amount" />
-        <div class="d-flex flex-row align-center">
-          <v-btn @click="onClickShowStages(contract.id)" text="Stages" class="ma-1" />
-          <v-btn @click="onClickShowContrpatry(contract.id)" text="ContrAgents" class="ma-1" />
-          <v-btn @click="onClickShowEditContract(contract.id)">EDIT</v-btn>
-          <v-btn @click="onClickDeleteContract(contract.id)">DELETE</v-btn>
+      <Stages
+          v-if="showStage"
+          :selectedContractForStages="selectedContractForStages"
+          @value-from-child="handleValue"
+      />
+      <SubContract
+          v-if="showSubContract"
+          :selectedContractForSubContract="selectedContractForSubContract"
+          @value-from-sub-contract="handleValueSubContract"
+      />
+      <v-card
+          class="w-100 ma-1 d-flex flex-row justify-space-between"
+          style="background-color: rgba(33,103,105,2)"
+          v-for="contract in filteredContracts"
+          :key="contract.id"
+      >
+        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.name"/>
+        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.contractType"/>
+        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.plannedStartDate"/>
+        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.plannedEndDate"/>
+        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.actualStartDate"/>
+        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.actualEndDate"/>
+        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.amount"/>
+        <div style="
+        color: navajowhite" class="d-flex flex-row align-center justify-space-between">
+          <v-btn
+              @click="onClickShowStages(contract.id)"
+              text="Stages"
+              class="ma-1 pa-2"
+              style="background-color:rgba(33,103,105,2); color: navajowhite"
+              variant="outlined"
+              elevation="7"
+          />
+          <v-btn
+              @click="onClickShowContrpatry(contract.id)"
+              text="ContrAgents"
+              class="ma-1 pa-2"
+              style="background-color:rgba(33,103,105,2); color: navajowhite"
+              variant="outlined"
+              elevation="7"
+          />
+          <v-btn
+              @click="onClickShowEditContract(contract.id)"
+              text="EDIT"
+              class="ma-1 pa-2"
+              style="background-color:rgba(33,103,105,2); color: navajowhite"
+              variant="outlined"
+              elevation="7"
+          />
+          <WarnBtn
+              :id="contract.id"
+              :onDelete="onClickDeleteContract"
+              text="DELETE"
+              class="ma-1 pa-2"
+              style="background-color:rgba(33,103,105,2); color: navajowhite"
+              variant="outlined"
+              elevation="7"
+          />
         </div>
       </v-card>
     </v-container>
@@ -89,6 +309,7 @@ import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import Stages from "./Stages.vue";
 import SubContract from "./SubContract.vue";
 import NavBar from "./NavBar.vue";
+import WarnBtn from "./WarnBtn.vue";
 
 const store = useRoomStore();
 
@@ -126,7 +347,6 @@ const editedContractActualStartDate = ref('');
 const editedContractActualEndDate = ref('');
 const editedContractAmount = ref('');
 
-
 function onClickShowStages(id) {
   if (showStage.value) {
     showStage.value = false;
@@ -159,7 +379,6 @@ function onClickShowEditContract(id) {
     editedContractAmount.value = contract.amount;
   }
 }
-
 
 const confirmEditContract = () => {
   const contractToUpdate = store.$state.contracts.find(contract => contract.id === selectedContractid.value)

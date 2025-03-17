@@ -9,32 +9,33 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitejs/plugin-vue": "^5.2.1",
     "axios": "^1.7.9",
+    "css-declaration-sorter": "^7.2.0",
+    "cssnano": "^7.0.6",
+    "esbuild": "^0.25.0",
     "exceljs": "^4.4.0",
+    "nth-check": "^2.1.1",
     "pinia": "^2.2.8",
+    "postcss-modules": "^6.0.1",
+    "serialize-javascript": "^6.0.2",
+    "svgo": "^3.3.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vuetify": "^3.7.5"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.20.0",
     "@mdi/font": "^7.4.47",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vite": "^6.0.1"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.15.0",
+    "prettier": "^3.5.1",
+    "vite": "^6.1.1",
+    "vue-eslint-parser": "^9.4.3"
   }
 }

@@ -73,7 +73,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn variant="outlined" text="EDIT" @click="onClickShowEditSubContract(subContract)"/>
-          <v-btn variant="outlined" text="DELETE" @click="deleteSubContract(subContract.id)" />
+          <WarnBtn :id="subContract.id" :onDelete="deleteSubContract" variant="outlined" text="DELETE" />
         </v-card-actions>
       </v-card>
     </v-card-text>
@@ -86,6 +86,7 @@
 <script setup>
 import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
+import WarnBtn from "./WarnBtn.vue";
 const store = useRoomStore();
 const { selectedContractForSubContract } = defineProps({
   selectedContractForSubContract: {

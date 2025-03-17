@@ -7,24 +7,146 @@
       <v-btn @click="onClickShowAddStage" class="ma-2 pa-2 mr-3" variant="outlined">ADD</v-btn>
     </div>
     <v-dialog v-model="ShowAddStage" width="1000px">
-      <v-card style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);">
+      <v-card style="
+
+      background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);">
         <v-card-title>EDIT</v-card-title>
         <v-card-text>
           <div class="d-flex flex-row">
-            <v-text-field v-model="addName" class="w-50 pa-2" variant="outlined" hide-details label="Name"/>
-            <v-text-field v-model="addAmount" class="w-50 pa-2" variant="outlined" hide-details label="Amount"/>
+            <v-text-field
+
+                v-model="addName"
+
+                class="w-50 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="Name"
+
+            />
+            <v-text-field
+
+                v-model="addAmount"
+
+                class="w-50 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="Amount"
+
+            />
           </div>
           <div class="d-flex flex-row">
-            <v-text-field v-model="addPlannedStartDate" class="w-25 pa-2" variant="outlined" hide-details label="plannedStartDate"/>
-            <v-text-field v-model="addPlannedEndDate" class="w-25 pa-2" variant="outlined" hide-details label="plannedEndDate"/>
-            <v-text-field v-model="addActualStartDate" class="w-25 pa-2" variant="outlined" hide-details label="actualStartDate"/>
-            <v-text-field v-model="addActualEndDate" class="w-25 pa-2" variant="outlined" hide-details label="actualEndDate"/>
+            <v-text-field
+
+                v-model="addPlannedStartDate"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="plannedStartDate"
+
+            />
+            <v-text-field
+
+                v-model="addPlannedEndDate"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="plannedEndDate"
+
+            />
+            <v-text-field
+
+                v-model="addActualStartDate"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="actualStartDate"
+
+            />
+            <v-text-field
+
+                v-model="addActualEndDate"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="actualEndDate"
+
+            />
           </div>
           <div class="d-flex flex-row">
-            <v-text-field v-model="addMaterialCostsPlan" class="w-25 pa-2" variant="outlined" hide-details label="materialCostsPlan"/>
-            <v-text-field v-model="addMaterialCostsActual" class="w-25 pa-2" variant="outlined" hide-details label="materialCostsActual"/>
-            <v-text-field v-model="addSalaryCostsPlan" class="w-25 pa-2" variant="outlined" hide-details label="salaryCostsPlan"/>
-            <v-text-field v-model="addSalaryCostsActual" class="w-25 pa-2" variant="outlined" hide-details label="salaryCostsActual"/>
+            <v-text-field
+
+                v-model="addMaterialCostsPlan"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="materialCostsPlan"
+
+            />
+            <v-text-field
+
+                v-model="addMaterialCostsActual"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="materialCostsActual"
+
+            />
+            <v-text-field
+
+                v-model="addSalaryCostsPlan"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="salaryCostsPlan"
+
+            />
+            <v-text-field
+
+                v-model="addSalaryCostsActual"
+
+                class="w-25 pa-2"
+
+                variant="outlined"
+
+                hide-details
+
+                label="salaryCostsActual"
+
+            />
           </div>
         </v-card-text>
         <v-card-actions class="d-flex flex-row justify-end">
@@ -37,25 +159,74 @@
       <v-card-title>EDIT STAGE</v-card-title>
       <v-card-text>
         <div class="d-flex flex-row">
-          <v-text-field class="w-50 pa-2" variant="outlined" v-model="editName" />
-          <v-text-field class="w-50 pa-2" variant="outlined" v-model="editAmount" />
+          <v-text-field
+              class="w-50 pa-2"
+              variant="outlined"
+              v-model="editName"
+          />
+          <v-text-field
+              class="w-50 pa-2"
+              variant="outlined"
+              v-model="editAmount"
+          />
         </div>
         <div class="d-flex flex-row">
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editPlannedStartDate" />
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editPlannedEndDate" />
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editActualStartDate" />
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editActualEndDate" />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editPlannedStartDate"
+          />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editPlannedEndDate"
+          />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editActualStartDate"
+          />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editActualEndDate"
+          />
         </div>
         <div class="d-flex flex-row">
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editMaterialCostsPlan" />
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editMaterialCostsActual" />
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editSalaryCostsPlan" />
-          <v-text-field class="w-25 pa-2" variant="outlined" v-model="editSalaryCostsActual" />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editMaterialCostsPlan"
+          />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editMaterialCostsActual"
+          />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editSalaryCostsPlan"
+          />
+          <v-text-field
+              class="w-25 pa-2"
+              variant="outlined"
+              v-model="editSalaryCostsActual"
+          />
         </div>
+
       </v-card-text>
       <v-card-actions>
-        <v-btn variant="outlined" @click="ShowEditStage = false" text="CANCEL"/>
-        <v-btn variant="outlined" @click="confirmEditStage" text="CONFIRM" />
+        <v-btn
+            variant="outlined"
+            @click="ShowEditStage = false"
+            text="CANCEL"
+        />
+        <v-btn
+            variant="outlined"
+            @click="confirmEditStage"
+            text="CONFIRM"
+        />
       </v-card-actions>
     </v-card>
     <v-card-text class="d-flex flex-row">
@@ -78,7 +249,7 @@
         </v-card-text>
         <v-card-actions class="d-flex flex-row justify-end align-center">
           <v-btn variant="outlined" class="ma-0 pa-1" @click="onClicksShowEditStage(stage)">EDIT</v-btn>
-          <v-btn variant="outlined" @click="deleteStage(stage.id)">DELETE</v-btn>
+          <WarnBtn :id="stage.id" :onDelete="deleteStage" variant="outlined">DELETE</WarnBtn>
         </v-card-actions>
       </v-card>
     </v-card-text>
@@ -91,7 +262,7 @@
 <script setup>
 import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
-import NavBar from "./NavBar.vue";
+import WarnBtn from "./WarnBtn.vue";
 const store = useRoomStore();
 let ShowAddStage = ref(false)
 let ShowEditStage = ref(false)

@@ -1,17 +1,18 @@
 <template>
-  <v-card class="w-25 mt-12 flex-column">
+  <v-card class="w-25 mt-12 flex-column" elevation="20" style="background: rgba(33,103,105,2)">
     <v-card-title class="ma-2 pa-2 d-flex flex-row justify-space-between">
-      <div class="d-flex justify-center align-center">
-        SIGN IN
+      <div class="d-flex justify-center align-center" style="color: navajowhite; font-size:x-large">
+        SIGN IN 
       </div>
-      <router-link to="/registration">
-        <v-btn text="log in" variant="outlined" color="black" class="ma-2 pa-2"/>
+      <router-link to="/registration" style="color: navajowhite">
+        <v-btn text="log in" variant="outlined" class="ma-2 pa-2"/>
       </router-link>
     </v-card-title>
     <v-card-text>
       <v-text-field
           hide-details
           variant="outlined"
+          style="color: navajowhite;"
           label="login"
           class="pa-2 ma-2"
           v-model="username"
@@ -19,6 +20,7 @@
       <v-text-field
           hide-details
           variant="outlined"
+          style="color: navajowhite;"
           label="password"
           class="pa-2 ma-2"
           v-model="password"
@@ -26,7 +28,7 @@
       />
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
-      <v-btn text="sign in" @click="signInPost"  color="teal" variant="outlined" class="pa-2"/>
+      <v-btn text="sign in" @click="signInPost"  style="color: navajowhite" variant="outlined" class="pa-2 ma-3 mt-0"/>
     </v-card-actions>
   </v-card>
 </template>
