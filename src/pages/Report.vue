@@ -1,29 +1,40 @@
 <template>
-  <NavBar class="mr-5 ml-5 rounded-b-xl" />
+  <nav-bar class="mr-5 ml-5 rounded-b-xl" />
   <v-container class="d-flex flex-row">
-    <v-card class="w-50 ma-2 pa-2" style="background-color: rgba(33,103,105,2);border: 2px solid navajowhite">
-      <v-card-title class="d-flex justify-center align-center" style="color: navajowhite">
+    <v-card
+        class="w-50 ma-2 pa-2"
+        style="background-color: rgba(33,103,105,2);border: 2px solid navajowhite"
+    >
+      <v-card-title
+          class="d-flex justify-center align-center"
+          style="color: navajowhite"
+      >
         Conclusion of all contracts for the specified planning period
       </v-card-title>
-      <v-card-subtitle><h3 style="color: navajowhite">Choose the period</h3></v-card-subtitle>
-      <v-card-text class="d-flex flex-row pa-2 ma-2" style="color: navajowhite">
+      <v-card-subtitle>
+        <h3 style="color: navajowhite">Choose the period</h3>
+      </v-card-subtitle>
+      <v-card-text
+          class="d-flex flex-row pa-2 ma-2"
+          style="color: navajowhite"
+      >
         <v-text-field
+            v-model="dateFromValue"
             class="ma-2 pa-2"
             variant="outlined"
             type="date"
             placeholder="2023-12-31"
             hide-details
             label="FROM"
-            v-model="dateFromValue"
         />
         <v-text-field
+            v-model="dateToValue"
             class="ma-2 pa-2"
             variant="outlined"
             type="date"
             placeholder="2023-12-31"
             hide-details
             label="TO"
-            v-model="dateToValue"
         />
       </v-card-text>
       <v-card-actions class="d-flex justify-center align-center">
@@ -37,25 +48,27 @@
         />
       </v-card-actions>
     </v-card>
-
-    <v-card class="w-50 ma-2 pa-2" style="background-color: rgba(33,103,105,2); border: 2px solid navajowhite">
+    <v-card
+        class="w-50 ma-2 pa-2"
+        style="background-color: rgba(33,103,105,2); border: 2px solid navajowhite"
+    >
       <v-card-title style="color: navajowhite">Choose the contract</v-card-title>
       <v-card-subtitle style="color: navajowhite">and I show you all stages</v-card-subtitle>
       <v-card-text class="d-flex justify-center align-center">
         <v-combobox
+            v-model="valueOfContract"
+            class="ma-2 pa-2"
             style="color: navajowhite"
             hide-details
-            :items="contractsNames"
-            v-model="valueOfContract"
             variant="outlined"
-            class="ma-2 pa-2"
             label="Choose the contract"
+            :items="contractsNames"
         />
       </v-card-text>
       <v-card-actions class="d-flex justify-center align-center">
         <v-btn
-            variant="outlined"
             class="ma-2 pa-2 w-75"
+            variant="outlined"
             text="SENT"
             style="color: navajowhite"
             @click="sendContractData"
@@ -71,13 +84,10 @@ import axios from 'axios';
 import NavBar from '../components/NavBar.vue';
 import { useRoomStore } from '../roomStore/piniaRoomStore';
 
-// Инициализация Pinia store
 const store = useRoomStore();
 
-// Данные из store
 const contractsNames = store.$state.contracts.map((item) => item.name);
 
-// Реактивные переменные
 const valueOfContract = ref('');
 const dateFromValue = ref('');
 const dateToValue = ref('');
@@ -90,7 +100,6 @@ const sendContractData = async () => {
       return;
     }
 
-    // Отправка POST-запроса на сервер
     const response = await axios.post(
         'http://localhost:8888/contract-excel',
         { contractName: valueOfContract.value },
@@ -98,19 +107,16 @@ const sendContractData = async () => {
           headers: {
             Authorization: `Bearer ${store.$state.token}`,
           },
-          responseType: 'blob' // Указываем, что ожидаем бинарные данные (файл)
+          responseType: 'blob'
         }
     );
 
-    // Создание ссылки для скачивания файла
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'contract_stages.xlsx'); // Имя файла
+    link.setAttribute('download', 'contract_stages.xlsx');
     document.body.appendChild(link);
     link.click();
-
-    // Очистка временных объектов
     link.remove();
     window.URL.revokeObjectURL(url);
   } catch (error) {
@@ -121,13 +127,11 @@ const sendContractData = async () => {
 
 const sendPeriodData = async () => {
   try {
-    // Проверка ввода
     if (!dateFromValue.value || !dateToValue.value) {
       errorMessage.value = 'Please select both FROM and TO dates.';
       return;
     }
 
-    // Отправка POST-запроса на сервер
     const response = await axios.post(
         'http://localhost:8888/data-excel',
         {
@@ -138,27 +142,21 @@ const sendPeriodData = async () => {
           headers: {
             Authorization: `Bearer ${store.$state.token}`,
           },
-          responseType: 'blob' // Указываем, что ожидаем бинарные данные (файл)
+          responseType: 'blob'
         }
     );
 
-    // Создание ссылки для скачивания файла
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'contracts.xlsx'); // Имя файла
+    link.setAttribute('download', 'contracts.xlsx');
     document.body.appendChild(link);
     link.click();
-
-    // Очистка временных объектов
     link.remove();
     window.URL.revokeObjectURL(url);
-
-    // Сброс дат
     dateFromValue.value = '';
     dateToValue.value = '';
   } catch (error) {
-    console.error('Error while sending period data:', error);
     errorMessage.value = 'An error occurred while downloading the file.';
   }
 };

@@ -1,34 +1,54 @@
 <template>
-  <v-card class="w-25 mt-12 flex-column" elevation="20" style="background: rgba(33,103,105,2)">
+  <v-card
+      class="w-25 mt-12 flex-column"
+      elevation="20"
+      style="background: rgba(33,103,105,2)"
+  >
     <v-card-title class="ma-2 pa-2 d-flex flex-row justify-space-between">
-      <div class="d-flex justify-center align-center" style="color: navajowhite; font-size:x-large">
+      <div
+          class="d-flex justify-center align-center"
+          style="color: navajowhite; font-size:x-large"
+      >
         SIGN IN 
       </div>
-      <router-link to="/registration" style="color: navajowhite">
-        <v-btn text="log in" variant="outlined" class="ma-2 pa-2"/>
+      <router-link
+          to="/registration"
+          style="color: navajowhite"
+      >
+        <v-btn
+            class="ma-2 pa-2"
+            text="log in"
+            variant="outlined"
+        />
       </router-link>
     </v-card-title>
     <v-card-text>
       <v-text-field
+          v-model="username"
+          class="pa-2 ma-2"
           hide-details
           variant="outlined"
           style="color: navajowhite;"
           label="login"
-          class="pa-2 ma-2"
-          v-model="username"
       />
       <v-text-field
+          v-model="password"
+          class="pa-2 ma-2"
           hide-details
           variant="outlined"
           style="color: navajowhite;"
           label="password"
-          class="pa-2 ma-2"
-          v-model="password"
           type="password"
       />
     </v-card-text>
     <v-card-actions class="d-flex justify-end">
-      <v-btn text="sign in" @click="signInPost"  style="color: navajowhite" variant="outlined" class="pa-2 ma-3 mt-0"/>
+      <v-btn
+          class="pa-2 ma-3 mt-0"
+          text="sign in"
+          style="color: navajowhite"
+          variant="outlined"
+          @click="signInPost"
+      />
     </v-card-actions>
   </v-card>
 </template>
@@ -53,9 +73,8 @@ async function signInPost() {
     });
     store.$state.token = response.data
     console.log(store.$state.token)
-    router.push("/Info");
+    router.replace("/Info");
   } catch (error) {
-    console.error("Sign in failed:", error.response?.data || error.message);
     alert("Sign in failed. Please check your credentials and try again.");
   }
 }

@@ -1,21 +1,29 @@
 <template>
-  <NavBar class="mr-5 ml-5 rounded-b-xl" />
-  <v-container class="d-flex flex-column pa-1 w-100" style="color: navajowhite">
+  <nav-bar class="mx-5 rounded-b-xl" />
+  <v-container
+      class="d-flex flex-column pa-1 w-100"
+      style="color: navajowhite"
+  >
     <div>
       <h2>My Contracts</h2>
-      <pre>{{ store.$state.contracts }}</pre>
+      <pre>{{ allContracts }}</pre>
       <h2>Sub Contracts</h2>
-      <pre>{{ store.$state.subContracts }}</pre>
+      <pre>{{ allSubContracts }}</pre>
       <h2>Contract Stages</h2>
-      <pre>{{ store.$state.contractStages }}</pre>
+      <pre>{{ allContractStages }}</pre>
       <h2>Counterparties</h2>
-      <pre>{{ store.$state.counterparties }}</pre>
+      <pre>{{ allCounterparties }}</pre>
     </div>
   </v-container>
 </template>
 
 <script setup>
-import { useRoomStore } from '/src/roomStore/piniaRoomStore.js';
-import NavBar from "./NavBar.vue";
+import { useRoomStore } from '/src/roomStore/piniaRoomStore.js'
+import NavBar from "/src/components/NavBar.vue";
+
 const store = useRoomStore();
+let allContracts = store.$state.contracts;
+let allSubContracts = store.$state.subContracts;
+let allContractStages = store.$state.contractStages;
+let allCounterparties = store.$state.counterparties;
 </script>

@@ -1,62 +1,189 @@
 <template>
-  <v-card class="pa-2" style="border: solid 2px orangered">
+  <v-card
+      class="pa-2"
+      style="border: solid 2px orangered"
+  >
     <v-card-title class="d-flex flex-row justify-space-between">
       {{selectedContractForSubContract.name}}
-      <v-btn variant="outlined" class="pa-2" text="ADD" @click="onClickShowAddSubContract" />
+      <v-btn
+          class="pa-2"
+          variant="outlined"
+          text="ADD"
+          @click="onClickShowAddSubContract"
+      />
     </v-card-title>
-    <v-dialog v-model="ShowAddSubContract" width="1000px">
-      <v-card class="pa-2" style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);">
+    <v-dialog
+        v-model="ShowAddSubContract"
+        width="1000px"
+    >
+      <v-card
+          class="pa-2"
+          style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);"
+      >
         <v-card-title>ADD subContract</v-card-title>
         <v-card-text>
           <div class="d-flex flex-row">
-            <v-text-field hide-details variant="outlined" class="pa-2 ma-2" label="Name" v-model="addName"/>
-            <v-text-field hide-details variant="outlined" class="pa-2 ma-2" label="Type" v-model="addContractType"/>
-            <v-text-field hide-details variant="outlined" class="pa-2 ma-2" label="Amount" v-model="addAmount"/>
+            <v-text-field
+                v-model="addName"
+                class="pa-2 ma-2"
+                hide-details
+                variant="outlined"
+                label="Name"
+            />
+            <v-text-field
+                v-model="addContractType"
+                class="pa-2 ma-2"
+                hide-details
+                variant="outlined"
+                label="Type"
+            />
+            <v-text-field
+                v-model="addAmount"
+                class="pa-2 ma-2"
+                hide-details
+                variant="outlined"
+                label="Amount"
+            />
           </div>
-          <div class="d-flex flex-row">
-            <v-text-field hide-details variant="outlined" class="pa-2 ma-2" label="PlannedStart" v-model="addPlannedStartDate"/>
-            <v-text-field hide-details variant="outlined" class="pa-2 ma-2" label="PlannedEnd" v-model="addPlannedEndDate"/>
-            <v-text-field hide-details variant="outlined" class="pa-2 ma-2" label="ActualStart" v-model="addActualStartDate"/>
-            <v-text-field hide-details variant="outlined" class="pa-2 ma-2" label="ActualEnd" v-model="addActualEndDate"/>
+          <div class="d-flex">
+            <v-text-field
+                v-model="addPlannedStartDate"
+                class="pa-2 ma-2"
+                hide-details
+                variant="outlined"
+                label="PlannedStart"
+            />
+            <v-text-field
+                v-model="addPlannedEndDate"
+                class="pa-2 ma-2"
+                hide-details
+                variant="outlined"
+                label="PlannedEnd"
+            />
+            <v-text-field
+                v-model="addActualStartDate"
+                class="pa-2 ma-2"
+                hide-details
+                variant="outlined"
+                label="ActualStart"
+            />
+            <v-text-field
+                v-model="addActualEndDate"
+                class="pa-2 ma-2"
+                hide-details
+                variant="outlined"
+                label="ActualEnd"
+            />
           </div>
           <v-combobox
-              clearable
               v-model="comboboxValue"
-              :items="counterpartiesNames"
-              label="Choose which counterparties"
               class="pa-2 ma-2"
+              clearable
+              label="Choose which counterparties"
               variant="outlined"
-          ></v-combobox>
+              :items="counterpartiesNames"
+          />
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="ShowAddSubContract = false" text="CANCEL" variant="outlined"/>
-          <v-btn @click="createSubContract" variant="outlined" text="CONFIRM"/>
+          <v-btn
+              @click="ShowAddSubContract = false"
+              variant="outlined"
+              text="CANCEL"
+          />
+          <v-btn
+              @click="createSubContract"
+              variant="outlined"
+              text="CONFIRM"
+          />
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-card v-if="ShowEditSubContract" class="ma-2 pa-2">
+    <v-card
+        v-if="ShowEditSubContract"
+        class="ma-2 pa-2"
+    >
       <v-card-title>EDIT</v-card-title>
       <v-card-text>
         <div class="d-flex flex-row">
-          <v-text-field hide-details variant="outlined" class="pa-2 ma-2" v-model="editName" label="Name"/>
-          <v-text-field hide-details variant="outlined" class="pa-2 ma-2" v-model="editContractType" label="ContractType"/>
-          <v-text-field hide-details variant="outlined" class="pa-2 ma-2" v-model="editAmount" label="Amount"/>
+          <v-text-field
+              v-model="editName"
+              class="pa-2 ma-2"
+              hide-details
+              variant="outlined"
+              label="Name"
+          />
+          <v-text-field
+              v-model="editContractType"
+              class="pa-2 ma-2"
+              hide-details
+              variant="outlined"
+              label="ContractType"
+          />
+          <v-text-field
+              v-model="editAmount"
+              class="pa-2 ma-2"
+              hide-details
+              variant="outlined"
+              label="Amount"
+          />
         </div>
-        <div class="d-flex flex-row">
-          <v-text-field hide-details variant="outlined" class="pa-2 ma-2" v-model="editPlannedStartDate" label="Planned Start"/>
-          <v-text-field hide-details variant="outlined" class="pa-2 ma-2" v-model="editPlannedEndDate" label="Planned End"/>
-          <v-text-field hide-details variant="outlined" class="pa-2 ma-2" v-model="editActualStartDate" label="ActualStart"/>
-          <v-text-field hide-details variant="outlined" class="pa-2 ma-2" v-model="editActualEndDate" label="ActualEnd"/>
+        <div class="d-flex">
+          <v-text-field
+              v-model="editPlannedStartDate"
+              class="pa-2 ma-2"
+              hide-details
+              variant="outlined"
+              label="Planned Start"
+          />
+          <v-text-field
+              v-model="editPlannedEndDate"
+              class="pa-2 ma-2"
+              hide-details
+              variant="outlined"
+              label="Planned End"
+          />
+          <v-text-field
+              v-model="editActualStartDate"
+              class="pa-2 ma-2"
+              hide-details
+              variant="outlined"
+              label="ActualStart"
+          />
+          <v-text-field
+              v-model="editActualEndDate"
+              class="pa-2 ma-2"
+              hide-details
+              variant="outlined"
+              label="ActualEnd"
+          />
         </div>
-        <v-combobox  variant="outlined" class="pa-2 ma-2" :items="counterpartiesNames" v-model="changeCounterparty" label="Counterparty"/>
+        <v-combobox
+            v-model="changeCounterparty"
+            class="pa-2 ma-2"
+            variant="outlined"
+            label="Counterparty"
+            :items="counterpartiesNames"
+        />
       </v-card-text>
       <v-card-actions>
-        <v-btn variant="outlined" text="CLOSE" @click="ShowEditSubContract = false"/>
-        <v-btn variant="outlined" text="CONFIRM" @click="ConfirmEditSubContract"/>
+        <v-btn
+            variant="outlined"
+            text="CLOSE"
+            @click="ShowEditSubContract = false"
+        />
+        <v-btn
+            variant="outlined"
+            text="CONFIRM"
+            @click="ConfirmEditSubContract"
+        />
       </v-card-actions>
     </v-card>
     <v-card-text class="d-flex flex-row">
-      <v-card v-for="subContract in filteredSubContract" :key="subContract.id" class="d-flex flex-column mr-3 pa-1">
+      <v-card
+          v-for="subContract in filteredSubContract"
+          :key="subContract.id"
+          class="d-flex flex-column mr-3 pa-1"
+      >
         <v-card-title>{{subContract.name}}</v-card-title>
         <v-card-subtitle>{{subContract.contractType}}</v-card-subtitle>
         <v-card-text class="d-flex flex-column ma-1 pa-2">
@@ -72,13 +199,26 @@
           <div>counterpartyId: {{subContract.counterpartyId}}</div>
         </v-card-text>
         <v-card-actions>
-          <v-btn variant="outlined" text="EDIT" @click="onClickShowEditSubContract(subContract)"/>
-          <WarnBtn :id="subContract.id" :onDelete="deleteSubContract" variant="outlined" text="DELETE" />
+          <v-btn
+              variant="outlined"
+              text="EDIT"
+              @click="onClickShowEditSubContract(subContract)"
+          />
+          <WarnBtn
+              :id="subContract.id"
+              :onDelete="deleteSubContract"
+              variant="outlined"
+              text="DELETE"
+          />
         </v-card-actions>
       </v-card>
     </v-card-text>
     <v-card-actions>
-      <v-btn @click="changeShowStage" text="CLOSE" variant="outlined" />
+      <v-btn
+          @click="changeShowStage"
+          text="CLOSE"
+          variant="outlined"
+      />
     </v-card-actions>
   </v-card>
 </template>
@@ -87,14 +227,18 @@
 import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
 import WarnBtn from "./WarnBtn.vue";
+
 const store = useRoomStore();
+
 const { selectedContractForSubContract } = defineProps({
   selectedContractForSubContract: {
     type: Object,
     required: true,
   },
 });
+
 const emit = defineEmits(['value-from-sub-contract']);
+
 let editingSubContractId = ref(-1)
 let ShowAddSubContract = ref(false)
 let comboboxValue = ref()
@@ -121,7 +265,7 @@ let ShowEditSubContract = ref(false)
 const counterpartiesNames = store.$state.counterparties.map(counterparty => counterparty.name);
 
 let contractId = selectedContractForSubContract.id
-  arrayOfSubContract.value = selectedContractForSubContract.subContracts
+arrayOfSubContract.value = selectedContractForSubContract.subContracts
 
 const filteredSubContract = computed(() => {
   if (!Array.isArray(arrayOfSubContract.value)) {
@@ -138,7 +282,6 @@ const onClickShowAddSubContract = () =>{
 
 function createSubContract() {
   if (!selectedContractForSubContract) {
-    console.error("selectedContractForSubContract is not defined");
     return;
   }
 
@@ -169,14 +312,14 @@ let num = findIdByName(comboboxValue.value);
   ShowAddSubContract.value = false;
 }
 
-const findNameById = (id) => {
+const findNameById = (id: number) => {
   const counterparty = store.$state.counterparties.find(item => item.id === id);
-  return counterparty ? counterparty.name : null; // Возвращаем name или null, если не найдено
+  return counterparty ? counterparty.name : null;
 };
 
-const findIdByName = (name) => {
+const findIdByName = (name: string) => {
   const counterparty = store.$state.counterparties.find(item => item.name === name);
-  return counterparty ? counterparty.id : null; // Возвращаем id или null, если не найдено
+  return counterparty ? counterparty.id : null;
 };
 
 const onClickShowEditSubContract = (subContract) => {
@@ -216,14 +359,13 @@ const ConfirmEditSubContract = () => {
   }
 }
 
-const deleteSubContract = (id) =>{
+const deleteSubContract = (id: number) =>{
   const index = store.$state.subContracts.findIndex(item => item.id === id);
   if(index !== -1){
     store.$state.subContracts.splice(index,1);
   }
 }
 
-const changeShowStage = () => {
-  emit('value-from-sub-contract', false);
-};
+const changeShowStage = () => emit('value-from-sub-contract', false);
+
 </script>

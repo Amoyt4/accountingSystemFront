@@ -38,7 +38,9 @@ const routes = [
     },
 ];
 
-export const router = createRouter({
-    history: createWebHistory(), // Используем createWebHistory для SPA
+const router = createRouter({
+    history: createWebHistory(),
     routes,
 });
+
+export default router;

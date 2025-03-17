@@ -1,9 +1,17 @@
 <template>
-  <NavBar class="mr-5 ml-5 rounded-b-xl" />
+  <nav-bar class="mx-5 rounded-b-xl"/>
   <v-container class="d-flex flex-column pa-1 w-100">
-    <v-container class="d-flex justify-center justify-space-between align-center pa-2 mt-3 rounded-t-lg" style="background-color: rgba(33,103,105,2)">
+    <v-container
+        class="d-flex justify-center justify-space-between align-center pa-2 mt-3 rounded-t-lg"
+        style="background-color: rgba(33,103,105,2)"
+    >
       <h2 style="color: navajowhite">CONTRACTS</h2>
-      <v-btn text="LOAD DATA" style="color: navajowhite" variant="outlined" @click="store.loadAllData" />
+      <v-btn
+          text="LOAD DATA"
+          style="color: navajowhite"
+          variant="outlined"
+          @click="store.loadAllData"
+      />
     </v-container>
     <v-container
         class="ma-0 pa-1 d-flex flex-column rounded-b-lg"
@@ -12,69 +20,68 @@
       <div class="d-flex">
         <h4 class="ma-2" style="color: navajowhite">FILTER BY</h4>
       </div>
-      <div class="d-flex flex-row"
-      >
+      <div class="d-flex flex-row">
         <v-text-field
             v-model="filterName"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Title"
             style="color: navajowhite"
         />
         <v-text-field
             v-model="filterType"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Type"
             style="color: navajowhite"
         />
         <v-text-field
             v-model="filterPlanedStart"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Planed Start"
             style="color: navajowhite"
         />
         <v-text-field
             v-model="filterPlanesEnd"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Planed End"
             style="color: navajowhite"
         />
         <v-text-field
             v-model="filterFaktStart"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Actual Start"
             style="color: navajowhite"
         />
         <v-text-field
             v-model="filterFaktEnd"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Actual End"
             style="color: navajowhite"
         />
         <v-text-field
             v-model="filterAmountFrom"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Amount From"
             style="color: navajowhite"
         />
         <v-text-field
             v-model="filterAmountTo"
+            class="ma-2"
             hide-details
             variant="outlined"
-            class="ma-2"
             label="Amount To"
             style="color: navajowhite"
         />
@@ -83,143 +90,150 @@
     <v-container class="w-100 pa-2 ma-2 mt-1">
       <div class="ma-2 mt-0 pa-2 d-flex flex-row justify-end align-center">
         <v-btn
-            @click="showAddPage = true"
             class="pa-2"
             variant="outlined"
             text="Add"
-            style="color: navajowhite;background-color: rgba(33,103,105,2);"
+            style="color: navajowhite; background-color: rgba(33,103,105,2);"
+            @click="showAddPage = true"
         />
-        <v-dialog v-model="showAddPage" width="1000px">
-          <v-card class="pa-2" style="background: rgba(33,103,105,2);">
+        <v-dialog
+            v-model="showAddPage"
+            width="1000px"
+        >
+          <v-card
+              class="pa-2"
+              style="background: rgba(33,103,105,2);"
+          >
             <v-card-title style="color: navajowhite">ADD NEW CONTRACT</v-card-title>
             <v-card-item>
               <v-text-field
+                  v-model="addTitle"
+                  class="ma-1 pa-2"
                   variant="outlined"
                   hide-details
-                  class="ma-1 pa-2"
                   style="color: navajowhite"
                   label="Title"
-                  v-model="addTitle"
               />
               <v-text-field
+                  v-model="addType"
+                  class="ma-1 pa-2"
                   variant="outlined"
                   hide-details
-                  class="ma-1 pa-2"
                   style="color: navajowhite"
                   label="Type"
-                  v-model="addType"
               />
               <v-text-field
+                  v-model="addPlanedStart"
+                  class="ma-1 pa-2"
                   variant="outlined"
                   hide-details
-                  class="ma-1 pa-2"
                   style="color: navajowhite"
                   label="PlanedStart"
-                  v-model="addPlanedStart"
               />
               <v-text-field
+                  v-model="addPlanedEnd"
+                  class="ma-1 pa-2"
                   variant="outlined"
                   hide-details
-                  class="ma-1 pa-2"
                   style="color: navajowhite"
                   label="PlanedEnd"
-                  v-model="addPlanedEnd"
               />
               <v-text-field
+                  v-model="addFactStart"
+                  class="ma-1 pa-2"
                   variant="outlined"
                   hide-details
-                  class="ma-1 pa-2"
                   style="color: navajowhite"
                   label="FactStart"
-                  v-model="addFactStart"
               />
               <v-text-field
+                  v-model="addFactEnd"
+                  class="ma-1 pa-2"
                   variant="outlined"
                   hide-details
-                  class="ma-1 pa-2"
                   style="color: navajowhite"
                   label="FactEnd"
-                  v-model="addFactEnd"
               />
               <v-text-field
+                  v-model="addAmount"
+                  class="ma-1 pa-2"
                   variant="outlined"
                   hide-details
-                  class="ma-1 pa-2"
                   style="color: navajowhite"
                   label="Amount"
-                  v-model="addAmount"
               />
             </v-card-item>
             <v-card-actions class="ma-2">
               <v-btn
                   variant="outlined"
-                  style="color: navajowhite "
-                  @click="onClickCreateContract"
+                  style="color: navajowhite"
                   text="ADD"
+                  @click="onClickCreateContract"
               />
               <v-btn
                   variant="outlined"
-                  style="
-                  color: navajowhite "
-                  @click="showAddPage = false"
+                  style="color: navajowhite"
                   text="Cancel"
+                  @click="showAddPage = false"
               />
             </v-card-actions>
           </v-card>
         </v-dialog>
       </div>
-      <v-card v-if="showEdit" class="ma-2 pa-2" >
+      <v-card
+          v-if="showEdit"
+          class="ma-2 pa-2"
+      >
         <v-card-title>EDIT CONTRACT</v-card-title>
         <v-card-text>
           <div class="d-flex flex-row">
             <v-text-field
-                hide-details
-                class="pa-2 ma-1"
                 v-model="editedContractTitle"
+                class="pa-2 ma-1"
+                hide-details
                 variant="outlined"
                 label="Title"
             />
             <v-text-field
-                hide-details
-                class="pa-2 ma-1"
                 v-model="editedContractType"
+                class="pa-2 ma-1"
+                hide-details
                 variant="outlined"
                 label="Type"
             />
             <v-text-field
-                hide-details
-                class="pa-2 ma-1"
                 v-model="editedContractAmount"
+                class="pa-2 ma-1"
+                hide-details
                 variant="outlined"
                 label="Amount" />
           </div>
           <div class="d-flex flex-row">
-
             <v-text-field
-                hide-details
-                class="pa-2 ma-1"
                 v-model="editedContractPlannedStartDate"
+                class="pa-2 ma-1"
+                hide-details
                 variant="outlined"
                 label="Planed Start"
             />
             <v-text-field
-                hide-details
-                class="pa-2 ma-1"
                 v-model="editedContractPlannedEndDate"
+                class="pa-2 ma-1"
+                hide-details
                 variant="outlined"
                 label="Planed End"
             />
             <v-text-field
-                hide-details
-                class="pa-2 ma-1"
                 v-model="editedContractActualStartDate"
+                class="pa-2 ma-1"
+                hide-details
                 variant="outlined"
                 label="Actual Start"
             />
             <v-text-field
-                hide-details
-                class="pa-2 ma-1"
                 v-model="editedContractActualEndDate"
+                class="pa-2 ma-1"
+                hide-details
                 variant="outlined"
                 label="Actual End"
             />
@@ -227,16 +241,15 @@
         </v-card-text>
         <v-card-actions>
           <v-btn
-              @click="showEdit = false"
               variant="outlined"
               text="CLOSE"
+              @click="showEdit = false"
           />
           <v-btn
-              @click="confirmEditContract"
               variant="outlined"
               text="CONFIRM"
+              @click="confirmEditContract"
           />
-
         </v-card-actions>
       </v-card>
       <Stages
@@ -250,49 +263,79 @@
           @value-from-sub-contract="handleValueSubContract"
       />
       <v-card
-          class="w-100 ma-1 d-flex flex-row justify-space-between"
-          style="background-color: rgba(33,103,105,2)"
           v-for="contract in filteredContracts"
           :key="contract.id"
+          class="w-100 ma-1 d-flex flex-row justify-space-between"
+          style="background-color: rgba(33,103,105,2)"
       >
-        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.name"/>
-        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.contractType"/>
-        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.plannedStartDate"/>
-        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.plannedEndDate"/>
-        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.actualStartDate"/>
-        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.actualEndDate"/>
-        <div style="color: navajowhite" class="pa-2 ma-2" v-text="contract.amount"/>
-        <div style="
-        color: navajowhite" class="d-flex flex-row align-center justify-space-between">
+        <div
+            v-text="contract.name"
+            class="pa-2 ma-2"
+            style="color: navajowhite"
+        />
+        <div
+            v-text="contract.contractType"
+            class="pa-2 ma-2"
+            style="color: navajowhite"
+        />
+        <div
+            v-text="contract.plannedStartDate"
+            class="pa-2 ma-2"
+            style="color: navajowhite"
+        />
+        <div
+            v-text="contract.plannedEndDate"
+            class="pa-2 ma-2"
+            style="color: navajowhite"
+        />
+        <div
+            v-text="contract.actualStartDate"
+            class="pa-2 ma-2"
+            style="color: navajowhite"
+        />
+        <div
+            v-text="contract.actualEndDate"
+            class="pa-2 ma-2"
+            style="color: navajowhite"
+        />
+        <div
+            v-text="contract.amount"
+            class="pa-2 ma-2"
+            style="color: navajowhite"
+        />
+        <div
+            class="d-flex flex-row align-center justify-space-between"
+            style="color: navajowhite"
+        >
           <v-btn
               @click="onClickShowStages(contract.id)"
-              text="Stages"
               class="ma-1 pa-2"
-              style="background-color:rgba(33,103,105,2); color: navajowhite"
+              text="Stages"
               variant="outlined"
               elevation="7"
+              style="background-color:rgba(33,103,105,2); color: navajowhite;"
           />
           <v-btn
               @click="onClickShowContrpatry(contract.id)"
-              text="ContrAgents"
               class="ma-1 pa-2"
-              style="background-color:rgba(33,103,105,2); color: navajowhite"
+              text="ContrAgents"
               variant="outlined"
               elevation="7"
+              style="background-color:rgba(33,103,105,2); color: navajowhite"
           />
           <v-btn
               @click="onClickShowEditContract(contract.id)"
-              text="EDIT"
               class="ma-1 pa-2"
-              style="background-color:rgba(33,103,105,2); color: navajowhite"
+              text="EDIT"
               variant="outlined"
               elevation="7"
+              style="background-color:rgba(33,103,105,2); color: navajowhite"
           />
           <WarnBtn
               :id="contract.id"
               :onDelete="onClickDeleteContract"
-              text="DELETE"
               class="ma-1 pa-2"
+              text="DELETE"
               style="background-color:rgba(33,103,105,2); color: navajowhite"
               variant="outlined"
               elevation="7"
@@ -303,69 +346,61 @@
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="js">
 import { ref, computed } from 'vue';
-import { useRoomStore } from "../roomStore/piniaRoomStore.js";
-import Stages from "./Stages.vue";
-import SubContract from "./SubContract.vue";
-import NavBar from "./NavBar.vue";
-import WarnBtn from "./WarnBtn.vue";
+import { useRoomStore } from "/src/roomStore/piniaRoomStore.js";
+import Stages from "/src/components/Stages.vue";
+import SubContract from "/src/components/SubContract.vue";
+import NavBar from "/src/components/NavBar.vue";
+import WarnBtn from "/src/components/WarnBtn.vue";
 
 const store = useRoomStore();
-
-const showStage = ref(false);
-const showSubContract = ref(false);
-const showAddPage = ref(false);
-const showEdit = ref(false);
-
-const filterName = ref('');
-const filterType = ref('');
-const filterPlanedStart = ref('');
-const filterPlanesEnd = ref('');
-const filterFaktStart = ref('');
-const filterFaktEnd = ref('');
+const showStage = ref<boolean>(false);
+const showSubContract = ref<boolean>(false);
+const showAddPage = ref<boolean>(false);
+const showEdit = ref<boolean>(false);
+const filterName = ref<String>('');
+const filterType = ref<String>('');
+const filterPlanedStart = ref<String>('');
+const filterPlanesEnd = ref<String>('');
+const filterFaktStart = ref<String>('');
+const filterFaktEnd = ref<String>('');
 const filterAmountFrom = ref(null);
 const filterAmountTo = ref(null);
-
-const addTitle = ref('');
-const addType = ref('');
-const addPlanedStart = ref('');
-const addPlanedEnd = ref('');
-const addFactStart = ref('');
-const addFactEnd = ref('');
-const addAmount = ref('');
-
+const addTitle = ref<String>('');
+const addType = ref<String>('');
+const addPlanedStart = ref<String>('');
+const addPlanedEnd = ref<String>('');
+const addFactStart = ref<String>('');
+const addFactEnd = ref<String>('');
+const addAmount = ref<String>('');
 const selectedContractForStages = ref(null);
 const selectedContractForSubContract = ref(null);
 let selectedContractid = ref(null);
+const editedContractTitle = ref<String>('');
+const editedContractType = ref<String>('');
+const editedContractPlannedStartDate = ref<String>('');
+const editedContractPlannedEndDate = ref<String>('');
+const editedContractActualStartDate = ref<String>('');
+const editedContractActualEndDate = ref<String>('');
+const editedContractAmount = ref<String>('');
 
-const editedContractTitle = ref('');
-const editedContractType = ref('');
-const editedContractPlannedStartDate = ref('');
-const editedContractPlannedEndDate = ref('');
-const editedContractActualStartDate = ref('');
-const editedContractActualEndDate = ref('');
-const editedContractAmount = ref('');
-
-function onClickShowStages(id) {
-  if (showStage.value) {
-    showStage.value = false;
-  } else {
+const onClickShowStages = (id: number) => {
+  if(!showStage.value){
     selectedContractForStages.value = store.$state.contracts.find((contract) => contract.id === id);
-    showStage.value = true;
   }
+  showStage.value = !showStage.value
 }
 
-function onClickShowContrpatry(id) {
-  if (showSubContract.value) {
-    showSubContract.value = false;
-  } else {
+function onClickShowContrpatry(id: number) {
+  if (!showSubContract.value) {
     selectedContractForSubContract.value = store.$state.contracts.find((contract) => contract.id === id);
-    showSubContract.value = true;
+  } else {
+    showSubContract.value = !showSubContract.value;
   }
 }
 
-function onClickShowEditContract(id) {
+function onClickShowEditContract(id: number) {
   showEdit.value = showEdit.value === false;
   const contract = store.$state.contracts.find((item) => item.id === id);
   selectedContractid.value = contract.id
@@ -402,7 +437,7 @@ const confirmEditContract = () => {
   }
 }
 
-function onClickDeleteContract(id) {
+function onClickDeleteContract(id:number) {
   const index = store.$state.contracts.findIndex((item) => item.id === id);
   if (index !== -1) {
     store.$state.contracts.splice(index, 1);
@@ -454,11 +489,8 @@ const filteredContracts = computed(() => {
   });
 });
 
-const handleValue = (value) =>{
-  showStage.value = value;
-}
+const handleValue = (value: boolean) =>  showStage.value = value;
 
-const handleValueSubContract = (value) => {
-  showSubContract.value = value
-}
+const handleValueSubContract = (value: boolean) => showSubContract.value = value;
+
 </script>

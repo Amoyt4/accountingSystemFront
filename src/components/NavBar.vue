@@ -1,36 +1,51 @@
 <template>
   <v-app-bar
-  absolute
-  style="background: rgba(33,103,105,2);"
+    absolute
+    style="background: rgba(33,103,105,2);"
   >
     <v-app-bar-title>
-      <router-link style="color: navajowhite;text-decoration: none;" to="/Info">
+      <router-link
+          to="/Info"
+          style="color: navajowhite;text-decoration: none;"
+      >
         <h2 class="pa-2 ml-0">Accounting System</h2>
       </router-link>
     </v-app-bar-title>
 
-    <router-link style="color: navajowhite" to="/contract">
+    <router-link
+        to="/contract"
+        style="color: navajowhite"
+    >
       <v-app-bar-nav-icon>
         <v-icon size="large">
           mdi-file-document-edit-outline
         </v-icon>
       </v-app-bar-nav-icon>
     </router-link>
-    <router-link style="color: navajowhite" to="/contractor">
+    <router-link
+        to="/contractor"
+        style="color: navajowhite"
+    >
       <v-app-bar-nav-icon>
         <v-icon size="large">
           mdi-earth
         </v-icon>
       </v-app-bar-nav-icon>
     </router-link>
-    <router-link style="color: navajowhite" to="/report">
+    <router-link
+        to="/report"
+        style="color: navajowhite"
+    >
       <v-app-bar-nav-icon>
         <v-icon size="large">
           mdi-microsoft-excel
         </v-icon>
       </v-app-bar-nav-icon>
     </router-link>
-    <router-link style="color: navajowhite" to="/admin">
+    <router-link
+        to="/admin"
+        style="color: navajowhite"
+    >
       <v-app-bar-nav-icon>
         <v-icon size="large">
           mdi-information-box-outline
@@ -50,15 +65,16 @@
         />
       </template>
       <router-link
-          style="
-          color: navajowhite;text-decoration: none;"
-          to="/">
+          to="/"
+          style="color: navajowhite;text-decoration: none;"
+      >
         <v-btn
-            size="medium"
             class="pa-2"
+            size="medium"
             variant="outlined"
             base-color="navajowhite"
-            style="background:teal">
+            style="background:teal"
+        >
           SIGN OUT
         </v-btn>
       </router-link>
