@@ -57,7 +57,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useRoomStore } from "../roomStore/piniaRoomStore.js";
+import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
 import axios from "axios";
 
 const store = useRoomStore();

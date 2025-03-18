@@ -244,36 +244,36 @@
 </template>
 
 <script setup>
-import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
-import WarnBtn from "/src/components/WarnBtn.vue";
+import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
+import WarnBtn from "@/components/WarnBtn.vue";
 
 const store = useRoomStore();
 let ShowAddStage = ref<boolean>(false)
 let ShowEditStage = ref<boolean>(false)
 let editingId = ref(-1)
 
-let addName = ref<string>()
-let addAmount = ref<number>()
+let addName = ref()
+let addAmount = ref()
 let addPlannedStartDate = ref()
 let addPlannedEndDate = ref()
 let addActualStartDate = ref()
 let addActualEndDate = ref()
-let addMaterialCostsPlan = ref<number>()
-let addMaterialCostsActual = ref<number>()
-let addSalaryCostsPlan = ref<number>()
-let addSalaryCostsActual = ref<number>()
+let addMaterialCostsPlan = ref()
+let addMaterialCostsActual = ref()
+let addSalaryCostsPlan = ref()
+let addSalaryCostsActual = ref()
 
-let editName = ref<string>()
-let editAmount = ref<number>()
+let editName = ref()
+let editAmount = ref()
 let editPlannedStartDate = ref()
 let editPlannedEndDate = ref()
 let editActualStartDate = ref()
 let editActualEndDate = ref()
-let editMaterialCostsPlan = ref<number>()
-let editMaterialCostsActual = ref<number>()
-let editSalaryCostsPlan = ref<number>()
-let editSalaryCostsActual = ref<number>()
+let editMaterialCostsPlan = ref()
+let editMaterialCostsActual = ref()
+let editSalaryCostsPlan = ref()
+let editSalaryCostsActual = ref()
 
 const { selectedContractForStages } = defineProps({
   selectedContractForStages: {
@@ -310,7 +310,6 @@ const onClicksShowEditStage = (stage) =>{
 
 const confirmEditStage = () => {
   const stageToUpdate = store.$state.contractStages.find(stage => stage.id === editingId.value);
-
   if (stageToUpdate) {
     stageToUpdate.name = editName.value;
     stageToUpdate.amount = editAmount.value;
@@ -345,7 +344,6 @@ const deleteStage = (id) => {
 };
 
 const onClickShowAddStage = () => ShowAddStage.value = !ShowAddStage.value
-
 
 function ConfirmCreatingStage(){
   store.$state.contractStages.push({

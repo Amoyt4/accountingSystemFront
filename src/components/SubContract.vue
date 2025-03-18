@@ -224,9 +224,9 @@
 </template>
 
 <script setup>
-import { useRoomStore } from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
-import WarnBtn from "./WarnBtn.vue";
+import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
+import WarnBtn from "@/components/WarnBtn.vue";
 
 const store = useRoomStore();
 
@@ -312,12 +312,12 @@ let num = findIdByName(comboboxValue.value);
   ShowAddSubContract.value = false;
 }
 
-const findNameById = (id: number) => {
+const findNameById = (id) => {
   const counterparty = store.$state.counterparties.find(item => item.id === id);
   return counterparty ? counterparty.name : null;
 };
 
-const findIdByName = (name: string) => {
+const findIdByName = (name) => {
   const counterparty = store.$state.counterparties.find(item => item.name === name);
   return counterparty ? counterparty.id : null;
 };
@@ -359,7 +359,7 @@ const ConfirmEditSubContract = () => {
   }
 }
 
-const deleteSubContract = (id: number) =>{
+const deleteSubContract = (id) =>{
   const index = store.$state.subContracts.findIndex(item => item.id === id);
   if(index !== -1){
     store.$state.subContracts.splice(index,1);

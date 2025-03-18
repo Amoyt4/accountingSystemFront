@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-import { useRoomStore } from '/src/roomStore/piniaRoomStore.js'
-import NavBar from "/src/components/NavBar.vue";
+import { useRoomStore } from '@/roomStore/piniaRoomStore.js'
+import NavBar from "@/components/NavBar.vue";
 
 const store = useRoomStore();
 let allContracts = store.$state.contracts;

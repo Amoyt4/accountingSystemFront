@@ -1,11 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Contract from "../components/Contract.vue";
-import Contractor from "../components/Contractor.vue";
-import Info from "../pages/Info.vue";
-import Report from "../pages/Report.vue";
-import Admin from "../components/Admin.vue";
-import Registration from "../pages/Registration.vue"; // Импорт компонента
-import SignIN from "../pages/SignIN.vue";
+import Contract from "@/components/Contract.vue";
+import Contractor from "@/components/Contractor.vue";
+import Info from "@/pages/Info.vue";
+import Report from "@/pages/Report.vue";
+import Admin from "@/components/Admin.vue";
+import Registration from "@/pages/Registration.vue";
+import SignIN from "@/pages/SignIN.vue";
 
 const routes = [
     {

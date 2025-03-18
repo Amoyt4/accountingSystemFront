@@ -219,27 +219,27 @@
   </v-container>
 </template>
 <script setup>
-import {useRoomStore} from "../roomStore/piniaRoomStore.js";
 import {computed, ref} from "vue";
-import NavBar from "/src/components/NavBar.vue";
-import WarnBtn from "/src/components/WarnBtn.vue";
+import {useRoomStore} from "@/roomStore/piniaRoomStore.js";
+import NavBar from "@/components/NavBar.vue";
+import WarnBtn from "@/components/WarnBtn.vue";
 
 let store = useRoomStore()
-let onClickShowDialog = ref<boolean>(false)
-let onClickShowEdit = ref<boolean>(false)
-let currendEditID = ref<number>(-1)
+let onClickShowDialog = ref(false)
+let onClickShowEdit = ref(false)
+let currendEditID = ref(-1)
 
-let counterPartyNameFilter = ref<string>()
-let counterPartyAddressFilter = ref<string>()
-let counterPartyInnFilter = ref<number>()
+let counterPartyNameFilter = ref()
+let counterPartyAddressFilter = ref()
+let counterPartyInnFilter = ref()
 
-let addCounterpartyName = ref<string>('')
-let addCounterpartyAddress = ref<string>('')
-let addVCounterpartyInn = ref<string>('')
+let addCounterpartyName = ref('')
+let addCounterpartyAddress = ref('')
+let addVCounterpartyInn = ref('')
 
-let NameEdit = ref<string>('')
-let AddressEdit = ref<string>('')
-let InnEdit = ref<string>('')
+let NameEdit = ref('')
+let AddressEdit = ref('')
+let InnEdit = ref('')
 
 function onClickEditCounterparty(counterparty) {
   currendEditID.value = counterparty.id;
@@ -275,7 +275,7 @@ function  onClickAddCounterparty(){
   onClickShowDialog.value = false;
 }
 
-function onClickDeleteCounterparty(id: number){
+function onClickDeleteCounterparty(id){
   const index = store.$state.counterparties.findIndex((item) => item.id === id);
   if (index !== -1){
     store.$state.counterparties.splice(index,1);

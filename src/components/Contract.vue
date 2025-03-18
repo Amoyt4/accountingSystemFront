@@ -308,28 +308,28 @@
             style="color: navajowhite"
         >
           <v-btn
-              @click="onClickShowStages(contract.id)"
               class="ma-1 pa-2"
               text="Stages"
               variant="outlined"
               elevation="7"
               style="background-color:rgba(33,103,105,2); color: navajowhite;"
+              @click="onClickShowStages(contract.id)"
           />
           <v-btn
-              @click="onClickShowContrpatry(contract.id)"
               class="ma-1 pa-2"
               text="ContrAgents"
               variant="outlined"
               elevation="7"
               style="background-color:rgba(33,103,105,2); color: navajowhite"
+              @click="onClickShowContrpatry(contract.id)"
           />
           <v-btn
-              @click="onClickShowEditContract(contract.id)"
               class="ma-1 pa-2"
               text="EDIT"
               variant="outlined"
               elevation="7"
               style="background-color:rgba(33,103,105,2); color: navajowhite"
+              @click="onClickShowEditContract(contract.id)"
           />
           <WarnBtn
               :id="contract.id"
@@ -346,53 +346,54 @@
   </v-container>
 </template>
 
-<script setup lang="js">
+<script setup>
 import { ref, computed } from 'vue';
-import { useRoomStore } from "/src/roomStore/piniaRoomStore.js";
-import Stages from "/src/components/Stages.vue";
-import SubContract from "/src/components/SubContract.vue";
-import NavBar from "/src/components/NavBar.vue";
-import WarnBtn from "/src/components/WarnBtn.vue";
+import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
+import Stages from "@/components/Stages.vue";
+import SubContract from "@/components/SubContract.vue";
+import NavBar from "@/components/NavBar.vue";
+import WarnBtn from "@/components/WarnBtn.vue";
 
 const store = useRoomStore();
-const showStage = ref<boolean>(false);
-const showSubContract = ref<boolean>(false);
-const showAddPage = ref<boolean>(false);
-const showEdit = ref<boolean>(false);
-const filterName = ref<String>('');
-const filterType = ref<String>('');
-const filterPlanedStart = ref<String>('');
-const filterPlanesEnd = ref<String>('');
-const filterFaktStart = ref<String>('');
-const filterFaktEnd = ref<String>('');
+
+const showStage = ref(false);
+const showSubContract = ref(false);
+const showAddPage = ref(false);
+const showEdit = ref(false);
+const filterName = ref('');
+const filterType = ref('');
+const filterPlanedStart = ref('');
+const filterPlanesEnd = ref('');
+const filterFaktStart = ref('');
+const filterFaktEnd = ref('');
 const filterAmountFrom = ref(null);
 const filterAmountTo = ref(null);
-const addTitle = ref<String>('');
-const addType = ref<String>('');
-const addPlanedStart = ref<String>('');
-const addPlanedEnd = ref<String>('');
-const addFactStart = ref<String>('');
-const addFactEnd = ref<String>('');
-const addAmount = ref<String>('');
+const addTitle = ref('');
+const addType = ref('');
+const addPlanedStart = ref('');
+const addPlanedEnd = ref('');
+const addFactStart = ref('');
+const addFactEnd = ref('');
+const addAmount = ref('');
 const selectedContractForStages = ref(null);
 const selectedContractForSubContract = ref(null);
 let selectedContractid = ref(null);
-const editedContractTitle = ref<String>('');
-const editedContractType = ref<String>('');
-const editedContractPlannedStartDate = ref<String>('');
-const editedContractPlannedEndDate = ref<String>('');
-const editedContractActualStartDate = ref<String>('');
-const editedContractActualEndDate = ref<String>('');
-const editedContractAmount = ref<String>('');
+const editedContractTitle = ref('');
+const editedContractType = ref('');
+const editedContractPlannedStartDate = ref('');
+const editedContractPlannedEndDate = ref('');
+const editedContractActualStartDate = ref('');
+const editedContractActualEndDate = ref('');
+const editedContractAmount = ref('');
 
-const onClickShowStages = (id: number) => {
+const onClickShowStages = (id) => {
   if(!showStage.value){
     selectedContractForStages.value = store.$state.contracts.find((contract) => contract.id === id);
   }
   showStage.value = !showStage.value
 }
 
-function onClickShowContrpatry(id: number) {
+function onClickShowContrpatry(id) {
   if (!showSubContract.value) {
     selectedContractForSubContract.value = store.$state.contracts.find((contract) => contract.id === id);
   } else {
@@ -400,7 +401,7 @@ function onClickShowContrpatry(id: number) {
   }
 }
 
-function onClickShowEditContract(id: number) {
+function onClickShowEditContract(id) {
   showEdit.value = showEdit.value === false;
   const contract = store.$state.contracts.find((item) => item.id === id);
   selectedContractid.value = contract.id
@@ -437,7 +438,7 @@ const confirmEditContract = () => {
   }
 }
 
-function onClickDeleteContract(id:number) {
+function onClickDeleteContract(id) {
   const index = store.$state.contracts.findIndex((item) => item.id === id);
   if (index !== -1) {
     store.$state.contracts.splice(index, 1);
@@ -469,12 +470,12 @@ function onClickCreateContract() {
 
 const filteredContracts = computed(() => {
   return store.$state.contracts.filter((contract) => {
-    const nameMatch = contract.name.toLowerCase().includes(filterName.value.toLowerCase());
-    const typeMatch = contract.contractType.toLowerCase().includes(filterType.value.toLowerCase());
-    const planedStartMatch = contract.plannedStartDate.toLowerCase().includes(filterPlanedStart.value.toLowerCase());
-    const planedEndMatch = contract.plannedEndDate.toLowerCase().includes(filterPlanesEnd.value.toLowerCase());
-    const actualStartMatch = contract.actualStartDate.toLowerCase().includes(filterFaktStart.value.toLowerCase());
-    const actualEndMatch = contract.actualEndDate.toLowerCase().includes(filterFaktEnd.value.toLowerCase());
+    const nameMatch = contract.name.toLowerCase().includes(filterName.value);
+    const typeMatch = contract.contractType.toLowerCase().includes(filterType.value);
+    const planedStartMatch = contract.plannedStartDate.toLowerCase().includes(filterPlanedStart.value);
+    const planedEndMatch = contract.plannedEndDate.toLowerCase().includes(filterPlanesEnd.value);
+    const actualStartMatch = contract.actualStartDate.toLowerCase().includes(filterFaktStart.value);
+    const actualEndMatch = contract.actualEndDate.toLowerCase().includes(filterFaktEnd.value);
     const amountFrom = filterAmountFrom.value ? parseFloat(filterAmountFrom.value) : null;
     const amountTo = filterAmountTo.value ? parseFloat(filterAmountTo.value) : null;
     let amountMatch = true;
@@ -489,8 +490,7 @@ const filteredContracts = computed(() => {
   });
 });
 
-const handleValue = (value: boolean) =>  showStage.value = value;
+const handleValue = (value) =>  showStage.value = value;
 
-const handleValueSubContract = (value: boolean) => showSubContract.value = value;
-
+const handleValueSubContract = (value) => showSubContract.value = value;
 </script>

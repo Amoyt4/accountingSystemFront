@@ -1,5 +1,5 @@
 <template>
-  <nav-bar class="mr-5 ml-5 rounded-b-xl" />
+  <nav-bar class="mx-5 rounded-b-xl" />
   <v-container class="d-flex flex-row">
     <v-card
         class="w-50 ma-2 pa-2"
@@ -81,8 +81,8 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-import NavBar from '../components/NavBar.vue';
-import { useRoomStore } from '../roomStore/piniaRoomStore';
+import NavBar from '@/components/NavBar.vue';
+import { useRoomStore } from '@/roomStore/piniaRoomStore';
 
 const store = useRoomStore();
 
