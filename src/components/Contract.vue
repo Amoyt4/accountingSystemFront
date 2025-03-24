@@ -20,7 +20,7 @@
       <div class="d-flex">
         <h4 class="ma-2" style="color: navajowhite">FILTER BY</h4>
       </div>
-      <div class="d-flex flex-row">
+      <div class="d-flex">
         <v-text-field
             v-model="filterName"
             class="ma-2"
@@ -88,7 +88,7 @@
       </div>
     </v-container>
     <v-container class="w-100 pa-2 ma-2 mt-1">
-      <div class="ma-2 mt-0 pa-2 d-flex flex-row justify-end align-center">
+      <div class="ma-2 mt-0 pa-2 d-flex justify-end align-center">
         <v-btn
             class="pa-2"
             variant="outlined"
@@ -186,7 +186,7 @@
       >
         <v-card-title>EDIT CONTRACT</v-card-title>
         <v-card-text>
-          <div class="d-flex flex-row">
+          <div class="d-flex">
             <v-text-field
                 v-model="editedContractTitle"
                 class="pa-2 ma-1"
@@ -208,7 +208,7 @@
                 variant="outlined"
                 label="Amount" />
           </div>
-          <div class="d-flex flex-row">
+          <div class="d-flex">
             <v-text-field
                 v-model="editedContractPlannedStartDate"
                 class="pa-2 ma-1"
@@ -265,46 +265,46 @@
       <v-card
           v-for="contract in filteredContracts"
           :key="contract.id"
-          class="w-100 ma-1 d-flex flex-row justify-space-between"
+          class="w-100 ma-1 d-flex justify-space-between"
           style="background-color: rgba(33,103,105,2)"
       >
         <div
+            class="pa-2 ma-2"
             v-text="contract.name"
-            class="pa-2 ma-2"
             style="color: navajowhite"
         />
         <div
+            class="pa-2 ma-2"
             v-text="contract.contractType"
-            class="pa-2 ma-2"
             style="color: navajowhite"
         />
         <div
+            class="pa-2 ma-2"
             v-text="contract.plannedStartDate"
-            class="pa-2 ma-2"
             style="color: navajowhite"
         />
         <div
+            class="pa-2 ma-2"
             v-text="contract.plannedEndDate"
-            class="pa-2 ma-2"
             style="color: navajowhite"
         />
         <div
+            class="pa-2 ma-2"
             v-text="contract.actualStartDate"
-            class="pa-2 ma-2"
             style="color: navajowhite"
         />
         <div
+            class="pa-2 ma-2"
             v-text="contract.actualEndDate"
-            class="pa-2 ma-2"
             style="color: navajowhite"
         />
         <div
+            class="pa-2 ma-2"
             v-text="contract.amount"
-            class="pa-2 ma-2"
             style="color: navajowhite"
         />
         <div
-            class="d-flex flex-row align-center justify-space-between"
+            class="d-flex align-center justify-space-between"
             style="color: navajowhite"
         >
           <v-btn
@@ -332,13 +332,13 @@
               @click="onClickShowEditContract(contract.id)"
           />
           <WarnBtn
-              :id="contract.id"
-              :onDelete="onClickDeleteContract"
               class="ma-1 pa-2"
               text="DELETE"
               style="background-color:rgba(33,103,105,2); color: navajowhite"
               variant="outlined"
               elevation="7"
+              :id="contract.id"
+              @onDelete="onClickDeleteContract"
           />
         </div>
       </v-card>
@@ -346,7 +346,7 @@
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="js">
 import { ref, computed } from 'vue';
 import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
 import Stages from "@/components/Stages.vue";
@@ -356,39 +356,40 @@ import WarnBtn from "@/components/WarnBtn.vue";
 
 const store = useRoomStore();
 
-const showStage = ref(false);
-const showSubContract = ref(false);
-const showAddPage = ref(false);
-const showEdit = ref(false);
-const filterName = ref('');
-const filterType = ref('');
-const filterPlanedStart = ref('');
-const filterPlanesEnd = ref('');
-const filterFaktStart = ref('');
-const filterFaktEnd = ref('');
+const showStage = ref<boolean>(false);
+const showSubContract = ref<boolean>(false);
+const showAddPage = ref<boolean>(false);
+const showEdit = ref<boolean>(false);
+const filterName = ref<string>('');
+const filterType = ref<string>('');
+const filterPlanedStart = ref<string>('');
+const filterPlanesEnd = ref<string>('');
+const filterFaktStart = ref<string>('');
+const filterFaktEnd = ref<string>('');
 const filterAmountFrom = ref(null);
 const filterAmountTo = ref(null);
-const addTitle = ref('');
-const addType = ref('');
-const addPlanedStart = ref('');
-const addPlanedEnd = ref('');
-const addFactStart = ref('');
-const addFactEnd = ref('');
-const addAmount = ref('');
+const addTitle = ref<string>('');
+const addType = ref<string>('');
+const addPlanedStart = ref<string>('');
+const addPlanedEnd = ref<string>('');
+const addFactStart = ref<string>('');
+const addFactEnd = ref<string>('');
+const addAmount = ref<string>('');
 const selectedContractForStages = ref(null);
 const selectedContractForSubContract = ref(null);
 let selectedContractid = ref(null);
-const editedContractTitle = ref('');
-const editedContractType = ref('');
-const editedContractPlannedStartDate = ref('');
-const editedContractPlannedEndDate = ref('');
-const editedContractActualStartDate = ref('');
-const editedContractActualEndDate = ref('');
-const editedContractAmount = ref('');
+const editedContractTitle = ref<string>('');
+const editedContractType = ref<string>('');
+const editedContractPlannedStartDate = ref<string>('');
+const editedContractPlannedEndDate = ref<string>('');
+const editedContractActualStartDate = ref<string>('');
+const editedContractActualEndDate = ref<string>('');
+const editedContractAmount = ref<string>('');
 
 const onClickShowStages = (id) => {
   if(!showStage.value){
     selectedContractForStages.value = store.$state.contracts.find((contract) => contract.id === id);
+    showStage.value = !showStage.value
   }
   showStage.value = !showStage.value
 }

@@ -17,7 +17,7 @@
         style="background-color: rgba(33,103,105,2)"
     >
       <h3 style="color:navajowhite">FILTER BY: </h3>
-      <div class="d-flex flex-row justify-space-around align-center">
+      <div class="d-flex  justify-space-around align-center">
         <v-text-field
             v-model="counterPartyNameFilter"
             class="pa-1 ma-1"
@@ -50,7 +50,7 @@
     >
       <v-card style="color: navajowhite; background-color: rgba(33,103,105,2); border:1px solid navajowhite">
         <v-card-title class="pa-2 ma-1 d-flex justify-center align-center">EDIT</v-card-title>
-        <v-card-text class="d-flex flex-row align-center justify-space-between">
+        <v-card-text class="d-flex  align-center justify-space-between">
           <v-text-field
               v-model="NameEdit"
               class="ma-2 pa-2"
@@ -98,7 +98,7 @@
       >
         <v-card style="color: navajowhite; background-color: rgba(33,103,105,2);border: 1px solid navajowhite">
           <v-card-title class="d-flex justify-center align-center">ADD NEW COUNTERPARTY</v-card-title>
-          <v-card-text class="d-flex flex-row align-center">
+          <v-card-text class="d-flex  align-center">
             <v-text-field
                 v-model="addCounterpartyName"
                 class="pa-2 ma-2"
@@ -159,7 +159,7 @@
           INN
         </div>
         <div
-            class="w-25 d-flex flex-row justify-end align-center"
+            class="w-25 d-flex  justify-end align-center"
             style="color: navajowhite"
         >
           <v-btn
@@ -173,7 +173,7 @@
       <div
           v-for="counterparty in filteredCounterparties"
           :key="counterparty.id"
-          class="d-flex flex-row mt-1 rounded"
+          class="d-flex  mt-1 rounded"
           style="color: navajowhite; background:rgba(33,103,105,2)"
       >
         <div
@@ -195,7 +195,7 @@
           {{counterparty.inn}}
         </div>
         <div
-            class="w-25 d-flex flex-row justify-end align-center"
+            class="w-25 d-flex  justify-end align-center"
             style="color: navajowhite"
         >
           <v-btn
@@ -206,12 +206,12 @@
               @click="onClickEditCounterparty(counterparty)"
           />
           <WarnBtn
-              :id="counterparty.id"
-              :onDelete="onClickDeleteCounterparty"
               class="pa-2 ma-2"
               text="DELETE"
               variant="outlined"
               elevation="7"
+              :id="counterparty.id"
+              @onDelete="onClickDeleteCounterparty"
           />
         </div>
       </div>

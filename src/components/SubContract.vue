@@ -3,7 +3,7 @@
       class="pa-2"
       style="border: solid 2px orangered"
   >
-    <v-card-title class="d-flex flex-row justify-space-between">
+    <v-card-title class="d-flex justify-space-between">
       {{selectedContractForSubContract.name}}
       <v-btn
           class="pa-2"
@@ -22,7 +22,7 @@
       >
         <v-card-title>ADD subContract</v-card-title>
         <v-card-text>
-          <div class="d-flex flex-row">
+          <div class="d-flex ">
             <v-text-field
                 v-model="addName"
                 class="pa-2 ma-2"
@@ -86,14 +86,14 @@
         </v-card-text>
         <v-card-actions>
           <v-btn
-              @click="ShowAddSubContract = false"
               variant="outlined"
               text="CANCEL"
+              @click="ShowAddSubContract = false"
           />
           <v-btn
-              @click="createSubContract"
               variant="outlined"
               text="CONFIRM"
+              @click="createSubContract"
           />
         </v-card-actions>
       </v-card>
@@ -104,7 +104,7 @@
     >
       <v-card-title>EDIT</v-card-title>
       <v-card-text>
-        <div class="d-flex flex-row">
+        <div class="d-flex">
           <v-text-field
               v-model="editName"
               class="pa-2 ma-2"
@@ -178,7 +178,7 @@
         />
       </v-card-actions>
     </v-card>
-    <v-card-text class="d-flex flex-row">
+    <v-card-text class="d-flex">
       <v-card
           v-for="subContract in filteredSubContract"
           :key="subContract.id"
@@ -189,11 +189,11 @@
         <v-card-text class="d-flex flex-column ma-1 pa-2">
           <div>Amount: {{subContract.amount}}</div>
           Planned date:
-          <div class="d-flex flex-row">
+          <div class="d-flex">
             <div>{{subContract.plannedStartDate  }} - {{subContract.plannedEndDate}}</div>
           </div>
           Actual date:
-          <div class="d-flex flex-row">
+          <div class="d-flex">
             <div>{{subContract.actualStartDate}} - {{subContract.actualEndDate}}</div>
           </div>
           <div>counterpartyId: {{subContract.counterpartyId}}</div>
@@ -205,19 +205,19 @@
               @click="onClickShowEditSubContract(subContract)"
           />
           <WarnBtn
-              :id="subContract.id"
-              :onDelete="deleteSubContract"
               variant="outlined"
               text="DELETE"
+              :id="subContract.id"
+              @onDelete="deleteSubContract"
           />
         </v-card-actions>
       </v-card>
     </v-card-text>
     <v-card-actions>
       <v-btn
-          @click="changeShowStage"
           text="CLOSE"
           variant="outlined"
+          @click="changeShowStage"
       />
     </v-card-actions>
   </v-card>

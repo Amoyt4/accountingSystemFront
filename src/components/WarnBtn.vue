@@ -12,7 +12,7 @@
       width="600px"
   >
     <v-card style="color: navajowhite; background-color: rgba(33,103,105,2); border: 2px dashed red">
-      <v-card-title class=" flex-row justify-center align-center pa-2 ma-2 ">ARE YOU SURE THAT YOU WANT TO DELETE?</v-card-title>
+      <v-card-title class="justify-center align-center pa-2 ma-2">ARE YOU SURE THAT YOU WANT TO DELETE?</v-card-title>
       <v-card-actions>
         <v-btn
             variant="outlined"

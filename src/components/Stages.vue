@@ -3,7 +3,7 @@
       style="border: solid 1px black"
       class="mb-2"
   >
-    <div class="d-flex flex-row justify-space-between">
+    <div class="d-flex justify-space-between">
       <v-card-title>
         {{selectedContractForStages.name}}
       </v-card-title>
@@ -22,7 +22,7 @@
       <v-card style="background: rgb(0,255,115); background: linear-gradient(90deg, rgba(0,255,115,1) 0%, rgba(10,77,175,1) 48%, rgba(218,0,255,1) 100%);">
         <v-card-title>EDIT</v-card-title>
         <v-card-text>
-          <div class="d-flex flex-row">
+          <div class="d-flex">
             <v-text-field
                 v-model="addName"
                 class="w-50 pa-2"
@@ -99,7 +99,7 @@
             />
           </div>
         </v-card-text>
-        <v-card-actions class="d-flex flex-row justify-end">
+        <v-card-actions class="d-flex justify-end">
           <v-btn
               variant="outlined"
               @click="ConfirmCreatingStage"
@@ -122,7 +122,7 @@
     >
       <v-card-title>EDIT STAGE</v-card-title>
       <v-card-text>
-        <div class="d-flex flex-row">
+        <div class="d-flex">
           <v-text-field
               v-model="editName"
               class="w-50 pa-2"
@@ -134,7 +134,7 @@
               variant="outlined"
           />
         </div>
-        <div class="d-flex flex-row">
+        <div class="d-flex">
           <v-text-field
               v-model="editPlannedStartDate"
               class="w-25 pa-2"
@@ -192,7 +192,7 @@
         />
       </v-card-actions>
     </v-card>
-    <v-card-text class="d-flex flex-row">
+    <v-card-text class="d-flex">
       <v-card
           v-for="stage in filteredStages"
           :key="stage.id"
@@ -204,17 +204,17 @@
           <div>Actual date: {{stage.actualStartDate}} - {{stage.actualEndDate}}</div>
           <div>Amount: {{stage.amount}}</div>
           <p>Material:</p>
-          <div class="d-flex flex-row justify-space-around">
+          <div class="d-flex justify-space-around">
           <div class="d-flex">Plan: {{stage.materialCostsPlan}}</div>
           <div class="d-flex">Actual:{{stage.materialCostsActual}}</div>
           </div>
           <p>Salary:</p>
-          <div class="d-flex flex-row justify-space-around">
+          <div class="d-flex justify-space-around">
             <div class="d-flex">Plan: {{stage.salaryCostsPlan}}</div>
             <div class="d-flex">Actual: {{stage.salaryCostsActual}}</div>
           </div>
         </v-card-text>
-        <v-card-actions class="d-flex flex-row justify-end align-center">
+        <v-card-actions class="d-flex justify-end align-center">
           <v-btn
               class="ma-0 pa-1"
               variant="outlined"
@@ -223,9 +223,9 @@
             EDIT
           </v-btn>
           <WarnBtn
-              :id="stage.id"
-              :onDelete="deleteStage"
               variant="outlined"
+              :id="stage.id"
+              @onDelete="deleteStage"
           >
             DELETE
           </WarnBtn>

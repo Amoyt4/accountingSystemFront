@@ -81,8 +81,8 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-import NavBar from '@/components/NavBar.vue';
 import { useRoomStore } from '@/roomStore/piniaRoomStore';
+import NavBar from '@/components/NavBar.vue';
 
 const store = useRoomStore();
 

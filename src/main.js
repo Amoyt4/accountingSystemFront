@@ -6,4 +6,8 @@ import {vuetify} from "@/UI/UI-kit.js";
 
 const app = createApp(App);
 
-app.use(createPinia()).use(router).use(vuetify).mount("#app");
+app
+    .use(createPinia())
+    .use(router)
+    .use(vuetify)
+    .mount("#app");
