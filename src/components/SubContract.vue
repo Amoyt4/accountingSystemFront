@@ -223,7 +223,7 @@
   </v-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {computed, ref} from "vue";
 import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
 import WarnBtn from "@/components/WarnBtn.vue";
@@ -239,28 +239,28 @@ const { selectedContractForSubContract } = defineProps({
 
 const emit = defineEmits(['value-from-sub-contract']);
 
-let editingSubContractId = ref(-1)
-let ShowAddSubContract = ref(false)
-let comboboxValue = ref()
-let addName = ref()
-let addContractType = ref()
-let addAmount = ref()
-let addPlannedStartDate = ref()
-let addPlannedEndDate = ref()
-let addActualStartDate = ref()
-let addActualEndDate = ref()
+let editingSubContractId = ref<number>(-1)
+let ShowAddSubContract = ref<boolean>(false)
+let comboboxValue = ref<string>('')
+let addName = ref<string>('')
+let addContractType = ref<string>('')
+let addAmount = ref<string>('')
+let addPlannedStartDate = ref<string>('')
+let addPlannedEndDate = ref<string>('')
+let addActualStartDate = ref<string>('')
+let addActualEndDate = ref<string>('')
 
-let editName = ref()
-let editContractType = ref()
-let editAmount = ref()
-let editPlannedStartDate = ref()
-let editPlannedEndDate = ref()
-let editActualStartDate = ref()
-let editActualEndDate = ref()
-let changeCounterparty = ref()
-let arrayOfSubContract = ref([])
+let editName = ref<string>('')
+let editContractType = ref<string>('')
+let editAmount = ref<string>('')
+let editPlannedStartDate = ref<string>('')
+let editPlannedEndDate = ref<string>('')
+let editActualStartDate = ref<string>('')
+let editActualEndDate = ref<string>('')
+let changeCounterparty = ref<string>('')
+let arrayOfSubContract = ref<string>('')
 
-let ShowEditSubContract = ref(false)
+let ShowEditSubContract = ref<boolean>(false)
 
 const counterpartiesNames = store.$state.counterparties.map(counterparty => counterparty.name);
 

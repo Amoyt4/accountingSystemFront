@@ -243,7 +243,7 @@
   </v-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {computed, ref} from "vue";
 import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
 import WarnBtn from "@/components/WarnBtn.vue";
@@ -251,29 +251,29 @@ import WarnBtn from "@/components/WarnBtn.vue";
 const store = useRoomStore();
 let ShowAddStage = ref<boolean>(false)
 let ShowEditStage = ref<boolean>(false)
-let editingId = ref(-1)
+let editingId = ref<number>(-1)
 
-let addName = ref()
-let addAmount = ref()
-let addPlannedStartDate = ref()
-let addPlannedEndDate = ref()
-let addActualStartDate = ref()
-let addActualEndDate = ref()
-let addMaterialCostsPlan = ref()
-let addMaterialCostsActual = ref()
-let addSalaryCostsPlan = ref()
-let addSalaryCostsActual = ref()
+let addName = ref<string>('')
+let addAmount = ref<string>('')
+let addPlannedStartDate = ref<string>('')
+let addPlannedEndDate = ref<string>('')
+let addActualStartDate = ref<string>('')
+let addActualEndDate = ref<string>('')
+let addMaterialCostsPlan = ref<string>('')
+let addMaterialCostsActual = ref<string>('')
+let addSalaryCostsPlan = ref<string>('')
+let addSalaryCostsActual = ref<string>('')
 
-let editName = ref()
-let editAmount = ref()
-let editPlannedStartDate = ref()
-let editPlannedEndDate = ref()
-let editActualStartDate = ref()
-let editActualEndDate = ref()
-let editMaterialCostsPlan = ref()
-let editMaterialCostsActual = ref()
-let editSalaryCostsPlan = ref()
-let editSalaryCostsActual = ref()
+let editName = ref<string>('')
+let editAmount = ref<string>('')
+let editPlannedStartDate = ref<string>('')
+let editPlannedEndDate = ref<string>('')
+let editActualStartDate = ref<string>('')
+let editActualEndDate = ref<string>('')
+let editMaterialCostsPlan = ref<string>('')
+let editMaterialCostsActual = ref<string>('')
+let editSalaryCostsPlan = ref<string>('')
+let editSalaryCostsActual = ref<string>('')
 
 const { selectedContractForStages } = defineProps({
   selectedContractForStages: {

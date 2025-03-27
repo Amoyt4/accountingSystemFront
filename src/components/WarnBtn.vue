@@ -34,21 +34,19 @@
 <script setup>
 import {ref} from "vue";
 
-let openDialog = ref(false)
+let openDialog = ref<boolean>(false)
+
+const emit  = defineEmits(['onDelete'])
 
 const props = defineProps({
   id: {
     type: Number,
     required: true,
-  },
-  onDelete: {
-    type: Function,
-    required: true,
   }
 });
 
 function handleDelete(){
-  props.onDelete(props.id);
+  emit('onDelete', props.id)
   openDialog.value = false;
 }
 </script>

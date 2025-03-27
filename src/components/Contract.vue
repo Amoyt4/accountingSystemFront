@@ -346,7 +346,7 @@
   </v-container>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
 import Stages from "@/components/Stages.vue";
@@ -366,8 +366,8 @@ const filterPlanedStart = ref<string>('');
 const filterPlanesEnd = ref<string>('');
 const filterFaktStart = ref<string>('');
 const filterFaktEnd = ref<string>('');
-const filterAmountFrom = ref(null);
-const filterAmountTo = ref(null);
+const filterAmountFrom = ref<string>(null);
+const filterAmountTo = ref<string>(null);
 const addTitle = ref<string>('');
 const addType = ref<string>('');
 const addPlanedStart = ref<string>('');
@@ -391,13 +391,11 @@ const onClickShowStages = (id) => {
     selectedContractForStages.value = store.$state.contracts.find((contract) => contract.id === id);
     showStage.value = !showStage.value
   }
-  showStage.value = !showStage.value
 }
 
 function onClickShowContrpatry(id) {
   if (!showSubContract.value) {
     selectedContractForSubContract.value = store.$state.contracts.find((contract) => contract.id === id);
-  } else {
     showSubContract.value = !showSubContract.value;
   }
 }

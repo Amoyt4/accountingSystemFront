@@ -62,8 +62,8 @@ import { useRoomStore } from "@/roomStore/piniaRoomStore.js";
 const store = useRoomStore();
 const router = useRouter();
 
-let username = ref("");
-let password = ref("");
+let username = ref<string>("");
+let password = ref<string>("");
 
 async function signInPost() {
   try {

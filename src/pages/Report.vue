@@ -88,10 +88,10 @@ const store = useRoomStore();
 
 const contractsNames = store.$state.contracts.map((item) => item.name);
 
-const valueOfContract = ref('');
-const dateFromValue = ref('');
-const dateToValue = ref('');
-const errorMessage = ref('');
+const valueOfContract = ref<string>('');
+const dateFromValue = ref<string>('');
+const dateToValue = ref<string>('');
+const errorMessage = ref<string>('');
 
 const sendContractData = async () => {
   try {
